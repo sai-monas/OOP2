@@ -4,6 +4,8 @@
 #include <cmath>
 #include <string>
 
+#include <iomanip>
+
 // For regex
 #include <regex>
 #include <cstdlib>
@@ -21,6 +23,7 @@ struct structureTest {
     int examGrade;
     int gradeCount;
     double averageGrade;
+    double medianGrade;
 };
 
 struct structureTestArray {
