@@ -1,25 +1,40 @@
 #include "headers_testas.h"
 
-structureTest student;
+structureBoolInt testas;
 
-// reik nepriimt float double char string!!
-void checkGrades(int &grade) {
-    while (grade < 1 || grade > 10) {
-    cout << "Incorrect value entered. Make sure that the exam grade is in range 1-10. Please try again." << endl;
-    cout << "Input student grade: ";
-    cin >> grade;};
+structureBoolInt validateGrade(std::string grade) {
+    std::regex checkIfNumber("^\\d+$");
+
+    if (cin.fail()) {
+        // Redundant ?
+        cout << "Grade is not a valid number" << endl;
+        testas.inputOkay = false;
+    }
+    else if (std::regex_match(grade, checkIfNumber) == false) {
+        cout << "Grade is not a valid number ((regex))" << endl;
+        testas.inputOkay = false;
+    }
+    else if (std::stof(grade) > 10 || std::stof(grade) < 0 ) {
+        cout << "Incorrect value entered. Make sure that the exam grade is in range 1-10. Please try again." << endl;
+        testas.inputOkay = false;
+    }
+    else {
+        testas.validatedGrade = std::stoi(grade);
+        testas.inputOkay = true;
+    }
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
+    return testas;
 };
 
 int main() {
     cout.precision(2);
-
     structureTest student;
     std::vector<structureTest> testukas;
-    int classGradeCount;
-    int interimClassGrade;
     int classGradeSum = 0;
     float averageGrade;
-    student.examGrade;
+    std::string stringClassGrade;
+    std::string stringExamGrade;
 
     // Collect inputs
     while (student.name !=  "x") {
@@ -35,35 +50,41 @@ int main() {
         cout << "Input student surname: ";
         cin >> student.surname;
 
-        // Collect student's exam grade
+        /* Collect student's exam grade
         cout << "Input student exam grade: ";
-        cin >> student.examGrade;
+        cin >> stringExamGrade;*/
 
-        // Check if student's exam grade is in range
-        checkGrades(student.examGrade);
+        // Check if collected grade is valid
+        do {
+            cout << "Input student grade: ";
+            cin >> stringExamGrade;
+            validateGrade(stringExamGrade);
+         } while (testas.inputOkay == false);
 
-        // Get class grade count
-        cout << "Type the amount of marks you wish to add: " << endl;
-        cin >> classGradeCount;
+        // Accept the exam grade
+         student.examGrade = testas.validatedGrade;
 
-        // Loop for class grades
-        for (int i = 1; i <= classGradeCount; i++) {
-            
-            // Collect class grades for the student
-            cout << "Input student class grade nr. " << i << ": ";
-            cin >> interimClassGrade;
+        student.gradeCount = -1;
 
-            // Check if student's class grade is in range
-            checkGrades(interimClassGrade);
+        // Collect student's class grades
+        while (testas.validatedGrade != 0) {
+            student.gradeCount++;
+            cout << "Enter grade " << student.gradeCount + 1 << endl;
+            // Check if collected grade is valid
+             do {
+                cin >> stringClassGrade;
+                validateGrade(stringClassGrade);
+             } while (testas.inputOkay == false);
 
-            // Push value to vector
-            student.classGrade.push_back(interimClassGrade);
+             // Accept the class grade
+             student.classGrade.push_back(testas.validatedGrade);
 
-            // Get sum of class grades for avg calculation
-            classGradeSum += interimClassGrade;};
-        
+             // Get sum of class grades for avg calculation
+             classGradeSum += testas.validatedGrade;
+        };
+
         // Calculate average of all grades for each student
-        student.averageGrade = static_cast<float>(classGradeSum + student.examGrade) / (classGradeCount + 1);
+        student.averageGrade = static_cast<float>(classGradeSum + student.examGrade) / (student.gradeCount + 1);
 
         testukas.push_back({student});
 

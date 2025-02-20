@@ -19,6 +19,7 @@ struct structureTest {
     std::string surname;
     std::vector<int> classGrade;
     int examGrade;
+    int gradeCount;
     double averageGrade;
 };
 
