@@ -29,12 +29,15 @@ structureBoolInt validateGrade(std::string grade) {
 
 int main() {
     cout.precision(2);
+
     structureTest student;
-    std::vector<structureTest> testukas;
-    int classGradeSum = 0;
-    float averageGrade;
+    std::vector<structureTest> studentGroup;
+
     std::string stringClassGrade;
     std::string stringExamGrade;
+
+    int classGradeSum = 0;
+    float averageGrade;
 
     // Collect inputs
     while (student.name !=  "x") {
@@ -49,10 +52,6 @@ int main() {
         // Collect student's last name
         cout << "Input student surname: ";
         cin >> student.surname;
-
-        /* Collect student's exam grade
-        cout << "Input student exam grade: ";
-        cin >> stringExamGrade;*/
 
         // Check if collected grade is valid
         do {
@@ -86,7 +85,7 @@ int main() {
         // Calculate average of all grades for each student
         student.averageGrade = static_cast<float>(classGradeSum + student.examGrade) / (student.gradeCount + 1);
 
-        testukas.push_back({student});
+        studentGroup.push_back({student});
 
         // Clear out variables
         student.classGrade.clear();
@@ -104,7 +103,7 @@ int main() {
 
     // Print out students with their average grades
     cout << "Name       Surname   Average" << endl << "-------------------------------------------------" << endl;
-    for (auto y :testukas){
+    for (auto y :studentGroup){
 	    cout << y.name << "  " << y.surname << "    " << y.averageGrade << endl;
     }
     return 0;
