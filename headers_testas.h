@@ -29,6 +29,7 @@ struct structureTestArray {
     int* classGrade = new int;
     int examGrade;
     int gradeCount;
+    double averageGrade;
 };
 
 struct structureBoolInt {

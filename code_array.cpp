@@ -30,6 +30,7 @@ structureBoolInt validateGrade(std::string grade) {
 int main() {
     structureTestArray student;
     cout.precision(2);
+    int classGradeSum = 0;
     std::vector<structureTestArray> testukas;
     std::string stringClassGrade;
     std::string stringExamGrade;
@@ -47,12 +48,9 @@ int main() {
         cout << "Input student surname: ";
         cin >> student.surname;
 
-        // Collect student's exam grade
-        cout << "Input student exam grade: ";
-        cin >> stringExamGrade;
-
         // Check if collected grade is valid
         do {
+            cout << "Input student exam grade: ";
             cin >> stringExamGrade;
             validateGrade(stringExamGrade);
          } while (testas.inputOkay == false);
@@ -75,21 +73,36 @@ int main() {
              } while (testas.inputOkay == false);
 
              // Accept the class grade
-             student.classGrade[student.gradeCount] = testas.validatedGrade; 
+             student.classGrade[student.gradeCount] = testas.validatedGrade;
+
+             // Get sum of class grades for avg calculation
+             classGradeSum += testas.validatedGrade;
         };
 
+        // Calculate average of all grades for each student
+        student.averageGrade = static_cast<float>(classGradeSum + student.examGrade) / (student.gradeCount + 1);
+
         testukas.push_back({student});
+
+        // Clear out variables
+        classGradeSum = 0;
         
     };
 
-    cout << "Name   Surname   Exam grade    Class grades" << endl << "-------------------------------------------------" << endl;
+    /*cout << "Name   Surname   Exam grade    Class grades" << endl << "-------------------------------------------------" << endl;
     for (auto n :testukas){
 	    cout << n.name << " " << n.surname << " " << n.examGrade << " ";
         for (int x = 0; x < n.gradeCount; x++) {
             cout << n.classGrade[x] << " ";
         };
         cout << endl;
-    };
+    };*/
+
+    // Print out students with their average grades
+    cout << "Name       Surname   Average" << endl << "-------------------------------------------------" << endl;
+    for (auto y :testukas){
+	    cout << y.name << "  " << y.surname << "    " << y.averageGrade << endl;
+    }
 
     delete[] student.classGrade;
 }
