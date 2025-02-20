@@ -1,12 +1,8 @@
-//#include <iostream>
-//#include <vector>
 #include "headers_testas.h"
-//using std::cout;
-//using std::cin;
-//using std::endl;
 
 structureTest student;
 
+// reik nepriimt float double char string!!
 void checkGrades(int &grade) {
     while (grade < 1 || grade > 10) {
     cout << "Incorrect value entered. Make sure that the exam grade is in range 1-10. Please try again." << endl;
@@ -77,13 +73,13 @@ int main() {
     }
 
     // Test if inputs are working
-    cout << "Name   Surname   Exam grade    Class grades" << endl << "-------------------------------------------------" << endl;
+    /*cout << "Name   Surname   Exam grade    Class grades" << endl << "-------------------------------------------------" << endl;
     for (auto n :testukas){
 	    cout << n.name << " " << n.surname << " " << n.examGrade << " ";
         for (auto v : n.classGrade)
             cout << v << " ";
         cout << endl;
-    };
+    };*/
 
     // Print out students with their average grades
     cout << "Name       Surname   Average" << endl << "-------------------------------------------------" << endl;
