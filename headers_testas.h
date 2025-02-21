@@ -29,10 +29,12 @@ struct structureTest {
 struct structureTestArray {
     std::string name;
     std::string surname;
-    int* classGrade = new int;
+    //int* classGrade = new int;
     int examGrade;
     int gradeCount;
+    int* classGrade = new int[gradeCount];
     double averageGrade;
+    double medianGrade;
 };
 
 struct structureBoolInt {

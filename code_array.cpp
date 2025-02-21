@@ -27,13 +27,34 @@ structureBoolInt validateGrade(std::string grade) {
     return testas;
 };
 
+bool validateOutputOption(std::string output) {
+    bool outputOkay;
+    if (cin.fail()) {
+        // Redundant ?
+        cout << "Invalid output option chosen. Please try again: " << endl;
+        outputOkay = false;
+    }
+    else if ((output != "M") && (output != "m") && (output != "A") && (output != "a")){
+        cout << "Invalid output option chosen. Please try again: " << endl;
+        outputOkay = false;
+    }
+    else {
+        outputOkay = true;
+    }
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
+    return outputOkay;
+};
+
 int main() {
     structureTestArray student;
     cout.precision(2);
     int classGradeSum = 0;
-    std::vector<structureTestArray> testukas;
+    std::vector<structureTestArray> studentGroup;
     std::string stringClassGrade;
     std::string stringExamGrade;
+
+    std::string outputOption;
 
     while (student.name !=  "x") {
 
@@ -58,7 +79,7 @@ int main() {
         // Accept the exam grade
          student.examGrade = testas.validatedGrade;
 
-        student.classGrade = new int[student.gradeCount];
+        //student.classGrade = new int[student.gradeCount];
 
         student.gradeCount = -1;
 
@@ -82,7 +103,25 @@ int main() {
         // Calculate average of all grades for each student
         student.averageGrade = static_cast<float>(classGradeSum + student.examGrade) / (student.gradeCount + 1);
 
-        testukas.push_back({student});
+        int* allGrades = new int[student.gradeCount + 1];
+        for (int i = 0; i < student.gradeCount; i++) {
+            allGrades[i] = student.classGrade[i];
+            //cout << allGrades[i] << " = " << student.classGrade[i] << endl;
+        }
+        allGrades[student.gradeCount] = student.examGrade;
+        std::sort(allGrades, allGrades + (student.gradeCount +1));
+        
+        // Odd number
+        if ((student.gradeCount + 1) % 2 != 0) {
+            student.medianGrade = (double)allGrades[(student.gradeCount + 1) / 2];
+        }
+        // Even number
+        else {
+            student.medianGrade = (double)(allGrades[student.gradeCount / 2] + allGrades[(student.gradeCount + 1) / 2]) / 2.0;
+        }
+
+
+        studentGroup.push_back({student});
 
         // Clear out variables
         classGradeSum = 0;
@@ -98,11 +137,37 @@ int main() {
         cout << endl;
     };*/
 
+    cout << "Would you like to receive a median or an average of the grades?" << endl << "Please type M for median, or A for average: ";
+    do {
+        cin >> outputOption;
+     } while (validateOutputOption(outputOption) == false);
+    if (outputOption == "M" || outputOption == "m") {
+        // Print out students with their median grades
+        cout << "Name       Surname   Median" << endl << "-------------------------------------------------" << endl;
+        for (auto y :studentGroup){
+	        cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.medianGrade << endl;
+        }
+    }
+    else if (outputOption == "A" || outputOption == "a") {
+        // Print out students with their average grades
+        cout << "Name       Surname   Average" << endl << "-------------------------------------------------" << endl;
+            for (auto y :studentGroup){
+	    cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.averageGrade << endl;
+        }
+    };
+
+    /*
     // Print out students with their average grades
     cout << "Name       Surname   Average" << endl << "-------------------------------------------------" << endl;
-    for (auto y :testukas){
-	    cout << y.name << "  " << y.surname << "    " << y.averageGrade << endl;
+    for (auto y :studentGroup){
+	    cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.averageGrade << endl;
     }
+
+    // Print out students with their median grades
+    cout << "Name       Surname   Median" << endl << "-------------------------------------------------" << endl;
+    for (auto y :studentGroup){
+	    cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.medianGrade << endl;
+    }*/
 
     delete[] student.classGrade;
 }
