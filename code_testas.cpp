@@ -46,6 +46,36 @@ bool validateOutputOption(std::string output) {
     return outputOkay;
 };
 
+bool validateInputOption(int input) {
+    bool inputOkay;
+    if (cin.fail()) {
+        // Redundant ?
+        cout << "Invalid option chosen. Please try again: " << endl;
+        inputOkay = false;
+    }
+    else if ((input != 1) && (input != 2) && (input != 3)){
+        cout << "Invalid option chosen. Please try again: " << endl;
+        inputOkay = false;
+    }
+    else {
+        inputOkay = true;
+    }
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
+    return inputOkay;
+};
+
+int generateRandomGrade() {
+
+	// Get a random number
+	int randomGrade = 1 + rand() % 10;
+
+	// Print the random number
+	cout<< randomGrade <<endl;
+
+    return randomGrade;
+};
+
 int main() {
 
     structureTest student;
@@ -59,9 +89,22 @@ int main() {
 
     std::vector<int> allGrades;
     int allGradeCount;
+
+    int inputOption;
     
     std::string outputOption;
 
+    // Providing a seed value
+	srand(time(0));
+
+    cout << "Welcome to student grade calculator. Choose next steps: " << endl;
+    cout << "Type 1 for manual grade input" << endl << "Type 2 for grade generation" << endl << "Type 3 to exit the program" << endl;
+    do {
+        cout << "Waiting for your answer: ";
+        cin >> inputOption;
+     } while (validateInputOption(inputOption) == false);
+
+    if (inputOption == 3) {return 0;};
 
     // Collect inputs
     while (student.name !=  "x") {
@@ -80,16 +123,23 @@ int main() {
         cout << "Input student surname: ";
         cin >> student.surname;
 
+        if (inputOption == 1) {
         // Check if collected grade is valid
-        do {
-            cout << "Input student's exam grade: ";
-            cin >> stringExamGrade;
-            validateGrade(stringExamGrade);
-         } while (testas.inputOkay == false);
+            do {
+                cout << "Input student's exam grade: ";
+                cin >> stringExamGrade;
+                validateGrade(stringExamGrade);
+            } while (testas.inputOkay == false);
 
         // Accept the exam grade
-         student.examGrade = testas.validatedGrade;
+            student.examGrade = testas.validatedGrade;
+        }
+        else {
+            cout << "Exam grade is: ";
+            student.examGrade = generateRandomGrade();
+        };
 
+        if (inputOption == 1) {
         student.gradeCount = -1;
 
         // Collect student's class grades
@@ -135,6 +185,40 @@ int main() {
         else {
             student.medianGrade = (double)(allGrades[(allGradeCount - 1) / 2] + allGrades[allGradeCount / 2]) / 2.0;
         }
+        }
+        else {
+            cout << "Type the amount of grades you wish to generate: ";
+            // Need to add validation
+            cin >> student.gradeCount;
+            for (int i = 0; i < student.gradeCount; i++) {
+                cout << endl << "Grade " << i + 1 << " is: ";
+                student.classGrade.push_back(generateRandomGrade());
+                classGradeSum += student.classGrade[i];
+            }
+
+            cout << "<< Class grade input finished for " << student.name << " >>" << endl;
+
+            student.averageGrade = static_cast<float>(classGradeSum + student.examGrade) / (student.gradeCount + 1);
+
+            // Create vector for all grades
+            allGrades = student.classGrade;
+            allGrades.insert(allGrades.begin(), student.examGrade);
+        
+            // Sort the vector in ascending order
+            sort(allGrades.begin(),allGrades.end());
+
+            // Get number of grades in vector
+            allGradeCount = allGrades.size();
+        
+            // Odd number
+            if (allGradeCount % 2 != 0) {
+                student.medianGrade = (double)allGrades[allGradeCount / 2];
+            }
+            // Even number
+            else {
+                student.medianGrade = (double)(allGrades[(allGradeCount - 1) / 2] + allGrades[allGradeCount / 2]) / 2.0;
+            }
+        };
 
         studentGroup.push_back({student});
 

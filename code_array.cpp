@@ -46,6 +46,36 @@ bool validateOutputOption(std::string output) {
     return outputOkay;
 };
 
+bool validateInputOption(int input) {
+    bool inputOkay;
+    if (cin.fail()) {
+        // Redundant ?
+        cout << "Invalid option chosen. Please try again: " << endl;
+        inputOkay = false;
+    }
+    else if ((input != 1) && (input != 2) && (input != 3)){
+        cout << "Invalid option chosen. Please try again: " << endl;
+        inputOkay = false;
+    }
+    else {
+        inputOkay = true;
+    }
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
+    return inputOkay;
+};
+
+int generateRandomGrade() {
+
+	// Get a random number
+	int randomGrade = 1 + rand() % 10;
+
+	// Print the random number
+	cout<< randomGrade <<endl;
+
+    return randomGrade;
+};
+
 int main() {
     structureTestArray student;
     cout.precision(2);
@@ -54,7 +84,21 @@ int main() {
     std::string stringClassGrade;
     std::string stringExamGrade;
 
+    int inputOption;
+
     std::string outputOption;
+
+    // Providing a seed value
+	srand(time(0));
+
+    cout << "Welcome to student grade calculator. Choose next steps: " << endl;
+    cout << "Type 1 for manual grade input" << endl << "Type 2 for grade generation" << endl << "Type 3 to exit the program" << endl;
+    do {
+        cout << "Waiting for your answer: ";
+        cin >> inputOption;
+     } while (validateInputOption(inputOption) == false);
+
+    if (inputOption == 3) {return 0;};
 
     while (student.name !=  "x") {
 
@@ -62,27 +106,32 @@ int main() {
         cout << "Input student name: ";
         cin >> student.name;
 
-        // Check if user wants to exit program
-        if (student.name == "x") break;
-
+       // Check if user wants to exit program
+        if (student.name == "x") {
+        cout << "<< Student input finished >>" << endl;
+        break;
+        };
         // Collect student's last name
         cout << "Input student surname: ";
         cin >> student.surname;
 
-        // Check if collected grade is valid
+        if (inputOption == 1) {
+        // Get and check if collected grade is valid
         do {
             cout << "Input student exam grade: ";
             cin >> stringExamGrade;
             validateGrade(stringExamGrade);
          } while (testas.inputOkay == false);
-
-        // Accept the exam grade
+         // Accept the exam grade
          student.examGrade = testas.validatedGrade;
+        }
+        else {
+            cout << "Exam grade is: ";
+            student.examGrade = generateRandomGrade();
+        };
 
-        //student.classGrade = new int[student.gradeCount];
-
+        if (inputOption == 1) {
         student.gradeCount = -1;
-
         // Collect student's class grades
         while (student.classGrade[student.gradeCount] != 0) {
             student.gradeCount++;
@@ -98,7 +147,9 @@ int main() {
 
              // Get sum of class grades for avg calculation
              classGradeSum += testas.validatedGrade;
-        };
+            };
+
+        cout << "<< Class grade input finished for " << student.name << " >>" << endl;
 
         // Calculate average of all grades for each student
         student.averageGrade = static_cast<float>(classGradeSum + student.examGrade) / (student.gradeCount + 1);
@@ -119,6 +170,41 @@ int main() {
         else {
             student.medianGrade = (double)(allGrades[student.gradeCount / 2] + allGrades[(student.gradeCount + 1) / 2]) / 2.0;
         }
+        }
+        else {
+            cout << "Type the amount of grades you wish to generate: ";
+            // Need to add validation
+            cin >> student.gradeCount;
+            for (int i = 0; i < student.gradeCount; i++) {
+                cout << endl << "Grade " << i + 1 << " is: ";
+                student.classGrade[i] = generateRandomGrade();
+                classGradeSum += student.classGrade[i];
+            }
+
+            cout << "<< Class grade input finished for " << student.name << " >>" << endl;
+
+            student.averageGrade = static_cast<float>(classGradeSum + student.examGrade) / (student.gradeCount + 1);
+
+            int* allGrades = new int[student.gradeCount + 1];
+            for (int i = 0; i < student.gradeCount; i++) {
+                allGrades[i] = student.classGrade[i];
+                cout << allGrades[i] << " = " << student.classGrade[i] << endl;
+                }
+            allGrades[student.gradeCount] = student.examGrade;
+            std::sort(allGrades, allGrades + (student.gradeCount +1));
+            for (int i; i < (student.gradeCount + 1); i++) {
+                cout << allGrades[i] << endl;
+            }
+        
+             // Odd number
+            if ((student.gradeCount + 1) % 2 != 0) {
+                student.medianGrade = (double)allGrades[(student.gradeCount + 1) / 2];
+            }
+            // Even number
+            else {
+                student.medianGrade = (double)(allGrades[student.gradeCount / 2] + allGrades[(student.gradeCount + 1) / 2]) / 2.0;
+            }
+        };
 
 
         studentGroup.push_back({student});
