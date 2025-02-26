@@ -98,23 +98,26 @@ int main() {
 	srand(time(0));
 
     cout << "Welcome to student grade calculator. Choose next steps: " << endl;
-    cout << "Type 1 for manual grade input" << endl << "Type 2 for grade generation" << endl << "Type 3 to exit the program" << endl;
+    cout << "- Type 1 for manual grade input" << endl << "- Type 2 for grade generation" << endl << "- Type 3 to exit the program" << endl;
     do {
         cout << "Waiting for your answer: ";
         cin >> inputOption;
      } while (validateInputOption(inputOption) == false);
 
-    if (inputOption == 3) {return 0;};
+    if (inputOption == 3) {
+        cout << endl << "Have a nice day!";
+        return 0;};
 
     // Collect inputs
-    while (student.name !=  "x") {
+    while (student.name !=  "x" || student.name != "X") {
+        cout << "- Please type X for the student name if you do not have any remaining students left." << endl;
 
         // Collect student's first name
         cout << "Input student name: ";
         cin >> student.name;
 
         // Check if user wants to exit program
-        if (student.name == "x") {
+        if (student.name == "x" || student.name == "X") {
             cout << "<< Student input finished >>" << endl;
             break;
         };
@@ -141,6 +144,8 @@ int main() {
 
         if (inputOption == 1) {
         student.gradeCount = -1;
+
+        cout << "- Please type 0 for the grade if you do not have any remaining grades left" << endl;
 
         // Collect student's class grades
         while (testas.validatedGrade != 0) {
