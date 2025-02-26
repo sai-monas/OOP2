@@ -94,6 +94,9 @@ int main() {
     
     std::string outputOption;
 
+    // For full student generation
+    
+
     // Providing a seed value
 	srand(time(0));
 
@@ -110,6 +113,7 @@ int main() {
 
     // Collect inputs
     while (student.name !=  "x" || student.name != "X") {
+        
         cout << "- Please type X for the student name if you do not have any remaining students left." << endl;
 
         // Collect student's first name
@@ -125,6 +129,7 @@ int main() {
         // Collect student's last name
         cout << "Input student surname: ";
         cin >> student.surname;
+
 
         if (inputOption == 1) {
         // Check if collected grade is valid

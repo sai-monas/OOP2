@@ -197,13 +197,13 @@ int main() {
             int* allGrades = new int[student.gradeCount + 1];
             for (int i = 0; i < student.gradeCount; i++) {
                 allGrades[i] = student.classGrade[i];
-                cout << allGrades[i] << " = " << student.classGrade[i] << endl;
+                //cout << allGrades[i] << " = " << student.classGrade[i] << endl;
                 }
             allGrades[student.gradeCount] = student.examGrade;
-            std::sort(allGrades, allGrades + (student.gradeCount +1));
+            /*std::sort(allGrades, allGrades + (student.gradeCount +1));
             for (int i; i < (student.gradeCount + 1); i++) {
                 cout << allGrades[i] << endl;
-            }
+            }*/
         
              // Odd number
             if ((student.gradeCount + 1) % 2 != 0) {
@@ -213,7 +213,7 @@ int main() {
             else {
                 student.medianGrade = (double)(allGrades[student.gradeCount / 2] + allGrades[(student.gradeCount + 1) / 2]) / 2.0;
             }
-            }
+            };
         
 
 
@@ -251,19 +251,6 @@ int main() {
 	    cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.averageGrade << endl;
         }
     };
-
-    /*
-    // Print out students with their average grades
-    cout << "Name       Surname   Average" << endl << "-------------------------------------------------" << endl;
-    for (auto y :studentGroup){
-	    cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.averageGrade << endl;
-    }
-
-    // Print out students with their median grades
-    cout << "Name       Surname   Median" << endl << "-------------------------------------------------" << endl;
-    for (auto y :studentGroup){
-	    cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.medianGrade << endl;
-    }*/
 
     delete[] student.classGrade;
 }
