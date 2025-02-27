@@ -53,7 +53,7 @@ bool validateInputOption(int input) {
         cout << "Invalid option chosen. Please try again: " << endl;
         inputOkay = false;
     }
-    else if ((input != 1) && (input != 2) && (input != 3)){
+    else if ((input != 1) && (input != 2) && (input != 3) && (input != 4)){
         cout << "Invalid option chosen. Please try again: " << endl;
         inputOkay = false;
     }
@@ -76,10 +76,21 @@ int generateRandomGrade() {
     return randomGrade;
 };
 
+int generateRandomNumber() {
+
+	// Get a random number
+	int randomNumber = rand() % 10;
+
+	// Print the random number
+	//cout<< randomGrade <<endl;
+
+    return randomNumber;
+};
+
 int main() {
 
-    structureTest student;
-    std::vector<structureTest> studentGroup;
+    structureTestVector student;
+    std::vector<structureTestVector> studentGroup;
 
     std::string stringClassGrade;
     std::string stringExamGrade;
@@ -94,31 +105,50 @@ int main() {
     
     std::string outputOption;
 
-    // For full student generation
-    
+    // For random student generation
+    std::string randomNames[10] = {"Konstantinas", "Danielius", "Vardenis", "Aleksandras", "Kazimieras", "Fridrichas", "Deimantas", "Tautvydas", "Edgaras", "Marijonas"};
+    std::string randomSurnames[10] = {"Muilinas", "Pavardenis", "Kavinukas", "Arbataitis", "Antinas", "Mogila", "Sudimtas", "Jonelaitis", "Regesas", "Mamontovas"};
+    int studentCount;
+    int keepingStudentCount = 0;
+    bool generationFinished = false;
 
     // Providing a seed value
 	srand(time(0));
 
     cout << "Welcome to student grade calculator. Choose next steps: " << endl;
-    cout << "- Type 1 for manual grade input" << endl << "- Type 2 for grade generation" << endl << "- Type 3 to exit the program" << endl;
+    cout << "- Type 1 for manual grade input" << endl << "- Type 2 for grade generation" << endl << "- Type 3 to generate students and their grades" << endl << "- Type 4 to exit the program" << endl;
     do {
         cout << "Waiting for your answer: ";
         cin >> inputOption;
      } while (validateInputOption(inputOption) == false);
 
-    if (inputOption == 3) {
+    if (inputOption == 4) {
         cout << endl << "Have a nice day!";
         return 0;};
+
+    if (inputOption == 3) {
+        cout << "Type the amount of students you wish to generate: ";
+        cin >> studentCount;
+    }
 
     // Collect inputs
     while (student.name !=  "x" || student.name != "X") {
         
-        cout << "- Please type X for the student name if you do not have any remaining students left." << endl;
+        
+        if ((inputOption == 1) || (inputOption == 2)) {
+            cout << "- Please type X for the student name if you do not have any remaining students left." << endl;
 
-        // Collect student's first name
-        cout << "Input student name: ";
-        cin >> student.name;
+            // Collect student's first name
+            cout << "Input student name: ";
+            cin >> student.name;
+        }
+        else {
+            keepingStudentCount += 1;
+            if (keepingStudentCount <= studentCount) {
+                student.name = randomNames[generateRandomNumber()];
+            }
+            else {generationFinished = true;};
+        }
 
         // Check if user wants to exit program
         if (student.name == "x" || student.name == "X") {
@@ -126,9 +156,20 @@ int main() {
             break;
         };
 
+        if (generationFinished == true) {
+            break;
+        };
+
+
         // Collect student's last name
-        cout << "Input student surname: ";
-        cin >> student.surname;
+        if ((inputOption == 1) || (inputOption == 2)) {
+            cout << "Input student surname: ";
+            cin >> student.surname;
+        }
+        else {
+            student.surname = randomSurnames[generateRandomNumber()];
+            cout << "Student " << keepingStudentCount << " is: " << student.name << " " << student.surname << endl;
+        }
 
 
         if (inputOption == 1) {

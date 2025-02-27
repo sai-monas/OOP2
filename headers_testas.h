@@ -16,7 +16,7 @@ using std::cin;
 using std::endl;
 
 
-struct structureTest {
+struct structureTestVector {
     std::string name;
     std::string surname;
     std::vector<int> classGrade;
