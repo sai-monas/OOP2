@@ -159,10 +159,14 @@ int main() {
         std::string currentLine;
         std::string firstLine;
         structureTestVector student;
+        std::string fileName;
 
+        cout << "Input file name to use for calculations: ";
+
+        cin >> fileName;
 
         // Read from the text file
-        ifstream file("kursiokai.txt");
+        ifstream file(fileName);
 
         getline(file, firstLine); // Ignore the first line
 
