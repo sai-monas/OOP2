@@ -1,6 +1,8 @@
 #include "headers_testas.h"
 
 structureBoolInt testas;
+structureTestVector tempStudent;
+std::vector<structureTestVector> studentGroup;
 
 structureBoolInt validateGrade(std::string grade) {
     std::regex checkIfNumber("^\\d+$");
@@ -53,7 +55,7 @@ bool validateInputOption(int input) {
         cout << "Invalid option chosen. Please try again: " << endl;
         inputOkay = false;
     }
-    else if ((input != 1) && (input != 2) && (input != 3) && (input != 4)){
+    else if ((input != 1) && (input != 2) && (input != 3) && (input != 4) && (input != 5)){
         cout << "Invalid option chosen. Please try again: " << endl;
         inputOkay = false;
     }
@@ -87,6 +89,30 @@ int generateRandomNumber() {
     return randomNumber;
 };
 
+structureTestVector parseStudentInfo(std::string& line) {
+    tempStudent.gradeCount = 0;
+    int tempGrade;
+    int whitespace = count(line.cbegin(), line.cend(), ' ');
+    int lineLength = line.length();
+    int actualLength = line.length() - whitespace;
+    std::istringstream stream(line);
+    if (whitespace >= 0) {
+        stream >> tempStudent.name;
+    }
+    if (whitespace >= 1) {
+        stream >> tempStudent.surname;
+    } 
+    if (whitespace >= 2) {
+        for (int i = 0; i < (actualLength - tempStudent.name.length() - tempStudent.surname.length()); i++) {
+        stream >> tempGrade;
+        if (tempGrade == 10) {
+            actualLength -= 1;
+        }
+        tempStudent.classGrade.push_back(tempGrade);};
+    };
+    return tempStudent;
+}
+
 int main() {
 
     structureTestVector student;
@@ -116,15 +142,60 @@ int main() {
 	srand(time(0));
 
     cout << "Welcome to student grade calculator. Choose next steps: " << endl;
-    cout << "- Type 1 for manual grade input" << endl << "- Type 2 for grade generation" << endl << "- Type 3 to generate students and their grades" << endl << "- Type 4 to exit the program" << endl;
+    cout << "- Type 1 for manual grade input" << endl << "- Type 2 for grade generation" << endl
+    << "- Type 3 to generate students and their grades" << endl  << "- Type 4 to calculate from file" << endl
+    << "- Type 5 to exit the program" << endl;
     do {
         cout << "Waiting for your answer: ";
         cin >> inputOption;
      } while (validateInputOption(inputOption) == false);
 
-    if (inputOption == 4) {
+    if (inputOption == 5) {
         cout << endl << "Have a nice day!";
         return 0;};
+    
+    
+    if (inputOption == 4) {
+        std::string currentLine;
+        std::string firstLine;
+        structureTestVector student;
+
+
+        // Read from the text file
+        ifstream file("kursiokai.txt");
+
+        getline(file, firstLine); // Ignore the first line
+
+        while (getline (file, currentLine)) {
+            student = parseStudentInfo(currentLine);
+
+            // Turning last grade to exam grade
+            // cout << "Number of class grades: " << student.classGrade.size() << "    16th grade: " << student.classGrade[student.classGrade.size() - 1] <<endl;
+            student.examGrade = student.classGrade[student.classGrade.size() - 1];
+            student.classGrade.pop_back();
+            // cout << "Number of class grades: " << student.classGrade.size() << endl;
+            // cout << "Exam grade: " << student.examGrade << endl << endl;
+
+            studentGroup.push_back(student);
+            tempStudent.classGrade.clear();
+            student.classGrade.clear();
+     }
+
+     cout << "Name   Surname   Class grades                 Exam grade" << endl << "------------------------------------------------------------" << endl;
+     for (auto n :studentGroup){
+         cout << n.name << " " << n.surname << " ";
+         for (auto v : n.classGrade)
+             cout << v << " ";
+        cout << "   " << n.examGrade;
+        cout << endl;
+     }
+
+    // Close the file
+    file.close();
+    }
+    
+    
+    if ((inputOption == 1) || (inputOption == 2) || (inputOption == 3)) {
 
     if (inputOption == 3) {
         cout << "Type the amount of students you wish to generate: ";
@@ -305,6 +376,7 @@ int main() {
 	    cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.averageGrade << endl;
         }
     };
+    }
 
     return 0;
 }

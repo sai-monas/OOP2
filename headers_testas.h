@@ -6,6 +6,12 @@
 
 #include <iomanip>
 
+// For file
+#include <fstream>
+using std::ifstream;
+#include <sstream>
+//using std::count;
+
 // For regex
 #include <regex>
 #include <cstdlib>
@@ -14,6 +20,7 @@
 using std::cout;
 using std::cin;
 using std::endl;
+using std::count;
 
 
 struct structureTestVector {
