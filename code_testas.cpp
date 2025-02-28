@@ -179,11 +179,43 @@ int main() {
             student.classGrade.pop_back();
             // cout << "Number of class grades: " << student.classGrade.size() << endl;
             // cout << "Exam grade: " << student.examGrade << endl << endl;
+            
+            student.gradeCount = student.classGrade.size();
+
+            int sum = 0;
+            for (int i = 0; i < student.classGrade.size(); i++) {
+                sum += student.classGrade[i];
+            }
+            sum += student.examGrade;
+
+            student.averageGrade = static_cast<double>(sum) / (student.gradeCount +1);
+
+            // Create vector for all grades
+        allGrades = student.classGrade;
+        allGrades.insert(allGrades.begin(), student.examGrade);
+        
+        // Sort the vector in ascending order
+        sort(allGrades.begin(),allGrades.end());
+
+        // Get number of grades in vector
+        allGradeCount = allGrades.size();
+        
+        // Odd number
+        if (allGradeCount % 2 != 0) {
+            student.medianGrade = (double)allGrades[allGradeCount / 2];
+        }
+        // Even number
+        else {
+            student.medianGrade = (double)(allGrades[(allGradeCount - 1) / 2] + allGrades[allGradeCount / 2]) / 2.0;
+        }
 
             studentGroup.push_back(student);
             tempStudent.classGrade.clear();
             student.classGrade.clear();
      }
+
+    // Close the file
+    file.close();
 
      cout << "Name   Surname   Class grades                 Exam grade" << endl << "------------------------------------------------------------" << endl;
      for (auto n :studentGroup){
@@ -194,8 +226,25 @@ int main() {
         cout << endl;
      }
 
-    // Close the file
-    file.close();
+     cout << "Would you like to receive a median or an average of the grades?" << endl << "Please type M for median, or A for average: ";
+     do {
+         cin >> outputOption;
+      } while (validateOutputOption(outputOption) == false);
+     if (outputOption == "M" || outputOption == "m") {
+         // Print out students with their median grades
+         cout << "Name       Surname   Median" << endl << "-------------------------------------------------" << endl;
+         for (auto y :studentGroup){
+             cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.medianGrade << endl;
+         }
+     }
+     else if (outputOption == "A" || outputOption == "a") {
+         // Print out students with their average grades
+         cout << "Name       Surname   Average" << endl << "-------------------------------------------------" << endl;
+             for (auto y :studentGroup){
+         cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.averageGrade << endl;
+         }
+     };
+
     }
     
     
