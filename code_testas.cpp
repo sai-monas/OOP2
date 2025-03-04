@@ -113,6 +113,22 @@ structureTestVector parseStudentInfo(std::string& line) {
     return tempStudent;
 }
 
+bool sortByName(structureTestVector& s1, structureTestVector& s2) {
+    return s1.name < s2.name;
+}
+
+bool sortBySurname(structureTestVector& s1, structureTestVector& s2) {
+    return s1.surname < s2.surname;
+}
+
+bool sortByAverage(structureTestVector& s1, structureTestVector& s2) {
+    return s1.averageGrade < s2.averageGrade;
+}
+
+bool sortByMedian(structureTestVector& s1, structureTestVector& s2) {
+    return s1.medianGrade < s2.medianGrade;
+}
+
 int main() {
 
     structureTestVector student;
@@ -130,6 +146,7 @@ int main() {
     int inputOption;
     
     std::string outputOption;
+    int fileOutputOption;
 
     // For random student generation
     std::string randomNames[10] = {"Konstantinas", "Danielius", "Vardenis", "Aleksandras", "Kazimieras", "Fridrichas", "Deimantas", "Tautvydas", "Edgaras", "Marijonas"};
@@ -217,35 +234,45 @@ int main() {
     // Close the file
     file.close();
 
-     cout << "Name   Surname   Class grades                 Exam grade" << endl << "------------------------------------------------------------" << endl;
+    cout << "File read successfully!" << endl;
+    cout << "Would you like to sort the results by name, surname, average grade or median grade?" << endl;
+    cout << "- Type 1 to sort by name" << endl << "- Type 2 to sort by surname" << endl
+    << "- Type 3 to sort by average grade" << endl  << "- Type 4 to sort by median grade" << endl
+    << "- Type 5 to skip sorting" << endl;
+
+    do {
+        cout << "Waiting for your answer: ";
+        cin >> fileOutputOption;
+     } while (validateInputOption(fileOutputOption) == false);
+
+    if (fileOutputOption == 1) {
+        std::sort(studentGroup.begin(), studentGroup.end(), sortByName);
+    }
+    else if (fileOutputOption == 2) {
+        std::sort(studentGroup.begin(), studentGroup.end(), sortBySurname);
+    }
+    else if (fileOutputOption == 3) {
+        std::sort(studentGroup.begin(), studentGroup.end(), sortByAverage);
+    }
+    else if (fileOutputOption == 4) {
+        std::sort(studentGroup.begin(), studentGroup.end(), sortByMedian);
+    }
+
+    /*cout << "Name   Surname   Class grades                 Exam grade" << endl << "------------------------------------------------------------" << endl;
      for (auto n :studentGroup){
          cout << n.name << " " << n.surname << " ";
          for (auto v : n.classGrade)
              cout << v << " ";
         cout << "   " << n.examGrade;
         cout << endl;
-     }
+     }*/
 
-     cout << "Would you like to receive a median or an average of the grades?" << endl << "Please type M for median, or A for average: ";
-     do {
-         cin >> outputOption;
-      } while (validateOutputOption(outputOption) == false);
-     if (outputOption == "M" || outputOption == "m") {
-         // Print out students with their median grades
-         cout << "Name       Surname   Median" << endl << "-------------------------------------------------" << endl;
-         for (auto y :studentGroup){
-             cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.medianGrade << endl;
-         }
-     }
-     else if (outputOption == "A" || outputOption == "a") {
-         // Print out students with their average grades
-         cout << "Name       Surname   Average" << endl << "-------------------------------------------------" << endl;
-             for (auto y :studentGroup){
-         cout << y.name << "  " << y.surname << "    " << std::setprecision(3) << y.averageGrade << endl;
-         }
-     };
-
-    }
+    cout << "Name            Surname         Average  Median" << endl << "-------------------------------------------------" << endl;
+        for (auto y :studentGroup){
+        cout << std::left << std::setw(15) << y.name << " " << std::setw(15) << y.surname << " " <<
+         std::setw(9) << std::setprecision(3) << y.averageGrade << std::setw(9) << std::setprecision(3) << y.medianGrade<< endl;
+        }
+    };
     
     
     if ((inputOption == 1) || (inputOption == 2) || (inputOption == 3)) {
