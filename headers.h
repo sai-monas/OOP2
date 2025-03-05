@@ -46,7 +46,7 @@ struct structureTestArray {
 
 struct structureBoolInt {
     bool inputOkay;
-    int validatedGrade;
+    int validatedNumber;
 };
 
 
@@ -60,6 +60,8 @@ int collectExamGrade();
 std::vector<int> collectClassGrade();
 int calculateSum(std::vector<int> grades);
 structureBoolInt validateGrade(std::string grade);
+structureBoolInt validateGradeCount(std::string count);
+std::vector<int> generateClassGrades();
 bool validateOutputOption(std::string output);
 bool validateInputOption(int input);
 int generateRandomGrade();

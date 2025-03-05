@@ -1,7 +1,8 @@
 #include "headers.h"
 #include <iostream>
 
-structureBoolInt testas;
+structureBoolInt gradeCheck;
+structureBoolInt countCheck;
 structureTestVector tempStudent;
 
 double calculateAverageGrade(int sum, int count) {
@@ -61,10 +62,10 @@ int collectExamGrade() {
         cout << "Input student's exam grade: ";
         cin >> stringExamGrade;
         validateGrade(stringExamGrade);
-    } while (testas.inputOkay == false);
+    } while (gradeCheck.inputOkay == false);
 
     // Accept the exam grade
-    return testas.validatedGrade;
+    return gradeCheck.validatedNumber;
 }
 
 std::vector<int> collectClassGrade() {
@@ -72,20 +73,17 @@ std::vector<int> collectClassGrade() {
     std::string stringClassGrade;
     std::vector<int> grades;
     int gradeCount = -1;
-    while (testas.validatedGrade != 0) {
+    while (gradeCheck.validatedNumber != 0) {
         gradeCount++;
         cout << "Enter grade " << gradeCount + 1 << ": " << endl;
         // Check if collected grade is valid
          do {
             cin >> stringClassGrade;
             validateGrade(stringClassGrade);
-         } while (testas.inputOkay == false);
+         } while (gradeCheck.inputOkay == false);
 
          // Accept the class grade
-         grades.push_back(testas.validatedGrade);
-
-         // Get sum of class grades for avg calculation
-         //classGradeSum += testas.validatedGrade;
+         grades.push_back(gradeCheck.validatedNumber);
     };
     return grades;
 }
@@ -106,24 +104,56 @@ structureBoolInt validateGrade(std::string grade) {
     if (cin.fail()) {
         // Redundant ?
         cout << "Grade is not a valid number. Please try again: " << endl;
-        testas.inputOkay = false;
+        gradeCheck.inputOkay = false;
     }
     else if (std::regex_match(grade, checkIfNumber) == false) {
         cout << "Grade is not a valid number. Please try again: " << endl;
-        testas.inputOkay = false;
-    }
-    else if (std::stof(grade) > 10 || std::stof(grade) < 0 ) {
-        cout << "Incorrect value entered. Make sure that the exam grade is in range 1-10. Please try again: " << endl;
-        testas.inputOkay = false;
+        gradeCheck.inputOkay = false;
     }
     else {
-        testas.validatedGrade = std::stoi(grade);
-        testas.inputOkay = true;
+        gradeCheck.validatedNumber = std::stoi(grade);
+        gradeCheck.inputOkay = true;
     }
     cin.clear();
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
-    return testas;
+    return gradeCheck;
 };
+
+structureBoolInt validateGradeCount(std::string count) {
+    std::regex checkIfNumber("^\\d+$");
+
+    if (cin.fail()) {
+        // Redundant ?
+        cout << "Amount is not a valid number. Please try again: " << endl;
+        countCheck.inputOkay = false;
+    }
+    else if (std::regex_match(count, checkIfNumber) == false) {
+        cout << "Amount is not a valid number. Please try again: " << endl;
+        countCheck.inputOkay = false;
+    }
+    else {
+        countCheck.validatedNumber = std::stoi(count);
+        countCheck.inputOkay = true;
+    }
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
+    return countCheck;
+};
+
+std::vector<int> generateClassGrades() {
+    std::vector<int> grades;
+    std::string gradeCount;
+    cout << "Type the amount of grades you wish to generate: ";
+    do {
+        cin >> gradeCount;
+        validateGradeCount(gradeCount);
+    } while (countCheck.inputOkay == false);
+    for (int i = 0; i < countCheck.validatedNumber; i++) {
+            cout << endl << "Grade " << i + 1 << " is: ";
+            grades.push_back(generateRandomGrade());
+        }
+    return grades;
+}
 
 bool validateOutputOption(std::string output) {
     bool outputOkay;
