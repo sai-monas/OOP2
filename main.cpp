@@ -49,9 +49,9 @@ int main() {
             std::string fileName;
             bool fileRead = false;
 
+            cout << "Input file name to use for calculations: ";
             while (fileRead == false) {
                 try {
-                    cout << "Input file name to use for calculations: ";
                     cin >> fileName;
 
                     // Read from the text file
@@ -62,7 +62,7 @@ int main() {
 
                     // Check if first line is empty
                     if (firstLine.empty() == false) {
-                        cout << "File read successfully!" << endl;
+                        cout << "File '" << fileName << "' opened successfully!" << endl;
                         fileRead = true;
                         }
                     else {
@@ -73,8 +73,8 @@ int main() {
                     setlocale(LC_ALL, ".UTF8");
                     SetConsoleOutputCP(CP_UTF8);
                     std::wcout << L"Klaida: pateiktas failas pavadinimu '";
-                    cout << input;
-                    std::wcout << L"' tuščias arba neegzistuoja." << endl;
+                    std::cout << input;
+                    std::wcout << L"' yra tuščias arba neegzistuoja. Bandykite iš naujo: ";
                 }
             }
 
