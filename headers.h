@@ -16,6 +16,9 @@ using std::ofstream;
 #include <regex>
 #include <cstdlib>
 
+// For speedtest
+#include <chrono>
+using namespace std::chrono;
 
 using std::cout;
 using std::cin;
