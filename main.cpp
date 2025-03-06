@@ -1,4 +1,5 @@
 #include "headers.h"
+#include <windows.h> // For Lithuanian output (SetConsoleOutputCP(CP_UTF8))
 
 std::vector<structureTestVector> studentGroup;
 structureTestVector student;
@@ -69,6 +70,8 @@ int main() {
                     }
                 }
                 catch (std::string input) {
+                    setlocale(LC_ALL, ".UTF8");
+                    SetConsoleOutputCP(CP_UTF8);
                     std::wcout << L"Klaida: pateiktas failas pavadinimu '";
                     cout << input;
                     std::wcout << L"' tuščias arba neegzistuoja." << endl;
