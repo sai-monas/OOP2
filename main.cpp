@@ -46,10 +46,36 @@ int main() {
             std::string firstLine;
             structureTestVector student;
             std::string fileName;
+            bool fileRead = false;
 
-            cout << "Input file name to use for calculations: ";
-            cin >> fileName; // Add exception
+            while (fileRead == false) {
+                try {
+                    cout << "Input file name to use for calculations: ";
+                    cin >> fileName;
 
+                    // Read from the text file
+                    ifstream file(fileName);
+
+                    // Get first line from the file
+                    getline(file, firstLine);
+
+                    // Check if first line is empty
+                    if (firstLine.empty() == false) {
+                        cout << "File read successfully!" << endl;
+                        fileRead = true;
+                        }
+                    else {
+                        throw fileName;
+                    }
+                }
+                catch (std::string input) {
+                    std::wcout << L"Klaida: pateiktas failas pavadinimu '";
+                    cout << input;
+                    std::wcout << L"' tuščias arba neegzistuoja." << endl;
+                }
+            }
+
+            
             // Read from the text file
             ifstream file(fileName);
 
@@ -82,7 +108,6 @@ int main() {
             file.close();
 
             // Sorting option menu
-            cout << "File read successfully!" << endl;
             cout << "Would you like to sort the results by name, surname, average grade or median grade?" << endl;
             cout << "- Type 1 to sort by name" << endl << "- Type 2 to sort by surname" << endl
                 << "- Type 3 to sort by average grade" << endl  << "- Type 4 to sort by median grade" << endl
