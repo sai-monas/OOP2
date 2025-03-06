@@ -91,9 +91,11 @@ int main() {
 
             if (fileOption == 2) {
 
+                // Name the file to generate
                 cout << "Name the file that will be generated: ";
                 cin >> fileName;
-                //fileName += ".txt";
+
+                // Generate the file
                 generateFile(fileName);
             }
 
@@ -145,6 +147,37 @@ int main() {
             sortOutput(studentGroup, fileOutputOption);
 
             outputMedianAndAverage(studentGroup);
+
+            std::vector<structureTestVector> badStudent; // average < 5
+
+            for (auto i: studentGroup) {
+                if (i.averageGrade < 5) {
+                    badStudent.push_back(i);
+                }
+            }
+
+            cout << endl;
+
+            outputMedianAndAverage(badStudent);
+
+            std::vector<structureTestVector> goodStudent; // average >= 5
+
+            for (auto i: studentGroup) {
+                if (i.averageGrade >= 5) {
+                    goodStudent.push_back(i);
+                }
+            }
+
+            cout << endl;
+
+            outputMedianAndAverage(goodStudent);
+
+            // Create file for bad students
+            //ofstream fileBad("bad_student");
+
+
+
+
             } // 4th option finished
 
         // 1st, 2nd and 3rd options
