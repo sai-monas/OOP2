@@ -148,6 +148,7 @@ int main() {
 
             outputMedianAndAverage(studentGroup);
 
+            // "Bad" student group creation
             std::vector<structureTestVector> badStudent; // average < 5
 
             for (auto i: studentGroup) {
@@ -156,10 +157,11 @@ int main() {
                 }
             }
 
-            cout << endl;
+            /*cout << endl;
 
-            outputMedianAndAverage(badStudent);
+            outputMedianAndAverage(badStudent);*/
 
+            // "Good" student group creation
             std::vector<structureTestVector> goodStudent; // average >= 5
 
             for (auto i: studentGroup) {
@@ -168,15 +170,41 @@ int main() {
                 }
             }
 
-            cout << endl;
+            /*cout << endl;
 
-            outputMedianAndAverage(goodStudent);
+            outputMedianAndAverage(goodStudent);*/
 
-            // Create file for bad students
-            //ofstream fileBad("bad_student");
+            // Create file for "bad" students
+            ofstream fileBad("bad_students");
+
+            fileBad << firstLine << endl;
+            for (auto n: badStudent) {
+                fileBad << std::left << std::setw(15) << n.name << std::setw(15) << n.surname;
+                for (int x = 0; x < n.gradeCount; x++) {
+                    fileBad << std::setw(6) << n.classGrade[x];
+                }
+                fileBad << std::setw(6) << n.examGrade << endl;
+            }
+
+            cout << "File 'bad_students' created successfully. 'bad_students' contains students which failed the course (average grade less than 5)." << endl;
+
+            fileBad.close();
 
 
+            // Create file for "good" students
+            ofstream fileGood("good_students");
+            fileGood << firstLine << endl;
+            for (auto n: goodStudent) {
+                fileGood << std::left << std::setw(15) << n.name << std::setw(15) << n.surname;
+                for (int x = 0; x < n.gradeCount; x++) {
+                    fileGood << std::setw(6) << n.classGrade[x];
+                }
+                fileGood << std::setw(6) << n.examGrade << endl;
+            }
 
+            cout << "File 'good_students' created successfully. 'good_students' contains students which passed the course (average grade more than or equal to 5)." << endl;
+
+            fileGood.close();
 
             } // 4th option finished
 
