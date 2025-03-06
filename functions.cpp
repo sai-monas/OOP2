@@ -151,6 +151,7 @@ std::vector<int> generateClassGrades() {
     for (int i = 0; i < countCheck.validatedNumber; i++) {
             cout << endl << "Grade " << i + 1 << " is: ";
             grades.push_back(generateRandomGrade());
+            cout << grades[i] << endl;
         }
     return grades;
 }
@@ -198,9 +199,6 @@ int generateRandomGrade() {
 	// Get a random grade from 1 to 10
 	int randomGrade = 1 + rand() % 10;
 
-    // Print to show user in terminal
-	cout<< randomGrade <<endl;
-
     return randomGrade;
 };
 
@@ -212,6 +210,8 @@ int generateRandomNumber() {
     return randomNumber;
 };
 
+// Parse information from given file
+// Format of file: NAME SURNAME CLASS_GRADES(n) EXAM_GRADE
 structureTestVector parseStudentInfo(std::string& line) {
     tempStudent.classGrade.clear();
     tempStudent.gradeCount = 0;
@@ -220,6 +220,7 @@ structureTestVector parseStudentInfo(std::string& line) {
     int lineLength = line.length();
     int actualLength = line.length() - whitespace;
     std::istringstream stream(line);
+    // Fix logic!!
     if (whitespace >= 0) {
         stream >> tempStudent.name;
     }

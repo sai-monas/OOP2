@@ -189,6 +189,7 @@ int main() {
             else {
                 cout << "Exam grade is: ";
                 student.examGrade = generateRandomGrade();
+                cout << student.examGrade << endl;
             }
 
             // Ask for class grades for 1st option
