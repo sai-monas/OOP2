@@ -1,11 +1,4 @@
 #include "headers.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <iomanip>
-using std::ifstream;
-using std::ofstream;
-
 
 int main() {
     ofstream file("students.txt");
