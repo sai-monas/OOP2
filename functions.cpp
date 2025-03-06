@@ -194,6 +194,25 @@ bool validateInputOption(int input) {
     return inputOkay;
 };
 
+bool validateFileMethod(int method) {
+    bool methodOkay;
+    if (cin.fail()) {
+        // Redundant ?
+        cout << "Invalid option chosen. Please try again: " << endl;
+        methodOkay = false;
+    }
+    else if ((method != 1) && (method != 2)){
+        cout << "Invalid option chosen. Please try again: " << endl;
+        methodOkay = false;
+    }
+    else {
+        method = true;
+    }
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
+    return method;
+};
+
 int generateRandomGrade() {
 
 	// Get a random grade from 1 to 10

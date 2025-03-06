@@ -8,9 +8,9 @@
 
 // For file
 #include <fstream>
-using std::ifstream;
 #include <sstream>
-//using std::count;
+using std::ifstream;
+using std::ofstream;
 
 // For regex
 #include <regex>
@@ -64,6 +64,7 @@ structureBoolInt validateGradeCount(std::string count);
 std::vector<int> generateClassGrades();
 bool validateOutputOption(std::string output);
 bool validateInputOption(int input);
+bool validateFileMethod(int method);
 int generateRandomGrade();
 int generateRandomNumber();
 structureTestVector parseStudentInfo(std::string& line);

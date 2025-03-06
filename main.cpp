@@ -42,8 +42,17 @@ int main() {
     
         // File option chosen
         if (inputOption == 4) {
+            int fileOption;
 
-            std::string currentLine;
+            cout << "File option chosen for the calculations!" << "Choose a method: " << endl;
+            cout << "- Type 1 to use an existing file" << endl << "- Type 2 to generate a file" << endl;
+            do {
+                cout << "Waiting for your answer: ";
+                cin >> fileOption;
+             } while (validateFileMethod(fileOption) == false);
+
+            if (fileOption == 1) {
+                std::string currentLine;
             std::string firstLine;
             structureTestVector student;
             std::string fileName;
@@ -126,7 +135,8 @@ int main() {
             sortOutput(studentGroup, fileOutputOption);
 
             outputMedianAndAverage(studentGroup);
-        } // 4th option finished
+            } // 4th option finished
+        }
 
         // 1st, 2nd and 3rd options
         if ((inputOption == 1) || (inputOption == 2) || (inputOption == 3)) {
