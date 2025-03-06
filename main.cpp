@@ -42,6 +42,12 @@ int main() {
     
         // File option chosen
         if (inputOption == 4) {
+            std::string currentLine;
+            std::string firstLine;
+            structureTestVector student;
+            std::string fileName;
+            bool fileRead = false;
+
             int fileOption;
 
             cout << "File option chosen for the calculations!" << "Choose a method: " << endl;
@@ -52,39 +58,43 @@ int main() {
              } while (validateFileMethod(fileOption) == false);
 
             if (fileOption == 1) {
-                std::string currentLine;
-            std::string firstLine;
-            structureTestVector student;
-            std::string fileName;
-            bool fileRead = false;
 
-            cout << "Input file name to use for calculations: ";
-            while (fileRead == false) {
-                try {
-                    cin >> fileName;
+                cout << "Input file name to use for calculations: ";
+                while (fileRead == false) {
+                    try {
+                        cin >> fileName;
 
-                    // Read from the text file
-                    ifstream file(fileName);
+                        // Read from the text file
+                        ifstream file(fileName);
 
-                    // Get first line from the file
-                    getline(file, firstLine);
+                        // Get first line from the file
+                        getline(file, firstLine);
 
-                    // Check if first line is empty
-                    if (firstLine.empty() == false) {
-                        cout << "File '" << fileName << "' opened successfully!" << endl;
-                        fileRead = true;
+                        // Check if first line is empty
+                        if (firstLine.empty() == false) {
+                            cout << "File '" << fileName << "' opened successfully!" << endl;
+                            fileRead = true;
                         }
-                    else {
-                        throw fileName;
+                        else {
+                            throw fileName;
+                        }
+                    }
+                    catch (std::string input) {
+                        setlocale(LC_ALL, ".UTF8");
+                        SetConsoleOutputCP(CP_UTF8);
+                        std::wcout << L"Klaida: pateiktas failas pavadinimu '";
+                        std::cout << input;
+                        std::wcout << L"' yra tuščias arba neegzistuoja. Bandykite iš naujo: ";
                     }
                 }
-                catch (std::string input) {
-                    setlocale(LC_ALL, ".UTF8");
-                    SetConsoleOutputCP(CP_UTF8);
-                    std::wcout << L"Klaida: pateiktas failas pavadinimu '";
-                    std::cout << input;
-                    std::wcout << L"' yra tuščias arba neegzistuoja. Bandykite iš naujo: ";
-                }
+            }
+
+            if (fileOption == 2) {
+
+                cout << "Name the file that will be generated: ";
+                cin >> fileName;
+                //fileName += ".txt";
+                generateFile(fileName);
             }
 
             
@@ -136,7 +146,6 @@ int main() {
 
             outputMedianAndAverage(studentGroup);
             } // 4th option finished
-        }
 
         // 1st, 2nd and 3rd options
         if ((inputOption == 1) || (inputOption == 2) || (inputOption == 3)) {

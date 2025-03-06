@@ -2,7 +2,7 @@
 #include <iostream>
 
 structureBoolInt gradeCheck;
-structureBoolInt countCheck;
+structureBoolInt check;
 structureTestVector tempStudent;
 
 double calculateAverageGrade(int sum, int count) {
@@ -61,7 +61,7 @@ int collectExamGrade() {
     do {
         cout << "Input student's exam grade: ";
         cin >> stringExamGrade;
-        validateGrade(stringExamGrade);
+        validateNumber(stringExamGrade);
     } while (gradeCheck.inputOkay == false);
 
     // Accept the exam grade
@@ -79,7 +79,7 @@ std::vector<int> collectClassGrade() {
         // Check if collected grade is valid
          do {
             cin >> stringClassGrade;
-            validateGrade(stringClassGrade);
+            validateNumber(stringClassGrade);
          } while (gradeCheck.inputOkay == false);
 
          // Accept the class grade
@@ -119,25 +119,25 @@ structureBoolInt validateGrade(std::string grade) {
     return gradeCheck;
 };
 
-structureBoolInt validateGradeCount(std::string count) {
+structureBoolInt validateNumber(std::string count) {
     std::regex checkIfNumber("^\\d+$");
 
     if (cin.fail()) {
         // Redundant ?
         cout << "Amount is not a valid number. Please try again: " << endl;
-        countCheck.inputOkay = false;
+        check.inputOkay = false;
     }
     else if (std::regex_match(count, checkIfNumber) == false) {
         cout << "Amount is not a valid number. Please try again: " << endl;
-        countCheck.inputOkay = false;
+        check.inputOkay = false;
     }
     else {
-        countCheck.validatedNumber = std::stoi(count);
-        countCheck.inputOkay = true;
+        check.validatedNumber = std::stoi(count);
+        check.inputOkay = true;
     }
     cin.clear();
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
-    return countCheck;
+    return check;
 };
 
 std::vector<int> generateClassGrades() {
@@ -146,15 +146,49 @@ std::vector<int> generateClassGrades() {
     cout << "Type the amount of grades you wish to generate: ";
     do {
         cin >> gradeCount;
-        validateGradeCount(gradeCount);
-    } while (countCheck.inputOkay == false);
-    for (int i = 0; i < countCheck.validatedNumber; i++) {
+        validateNumber(gradeCount);
+    } while (check.inputOkay == false);
+    for (int i = 0; i < check.validatedNumber; i++) {
             cout << endl << "Grade " << i + 1 << " is: ";
             grades.push_back(generateRandomGrade());
             cout << grades[i] << endl;
         }
     return grades;
 }
+
+void generateFile(std::string name) {
+    ofstream file(name);
+
+    std::string studentAmount;
+    std::string gradeAmount;
+
+    cout << "Type the amount of students you wish to generate: ";
+    do {
+        cin >> studentAmount;
+        validateNumber(studentAmount);
+    } while (check.inputOkay == false);
+    
+    cout << "Type the amount of class grades you wish to generate for each student: ";
+    do {
+        cin >> gradeAmount;
+        validateNumber(gradeAmount);
+    } while (check.inputOkay == false);
+
+    file << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde";
+    for (int i = 1; i <= std::stoi(gradeAmount); i++) {
+        file << std::setw(6) << "ND" + std::to_string(i); 
+    }
+    file << std::setw(6) << "Egz." << std::endl;
+
+    for (int i = 1; i <= std::stoi(studentAmount); i++) {
+        file << std::left << std::setw(15) << "Vardas" + std::to_string(i) << std::setw(15) << "Pavarde" + std::to_string(i);
+        for (int y = 1; y <= std::stoi(gradeAmount); y++) {
+            file << std::setw(6) << generateRandomGrade();
+        }
+        file << std::setw(6) << generateRandomGrade() << std::endl;
+    }
+    file.close();
+};
 
 bool validateOutputOption(std::string output) {
     bool outputOkay;
