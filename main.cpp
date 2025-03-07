@@ -99,6 +99,8 @@ int main() {
                 generateFile(fileName);
             }
 
+                // Get starting timepoint for file reading
+                auto startReadingFile = high_resolution_clock::now();
             
             // Read from the text file
             ifstream file(fileName);
@@ -131,6 +133,9 @@ int main() {
             // Close the file
             file.close();
 
+                // Get ending timepoint for file reading
+                auto stopReadingFile = high_resolution_clock::now();
+
             // Sorting option menu
             cout << "Would you like to sort the results by name, surname, average grade or median grade?" << endl;
             cout << "- Type 1 to sort by name" << endl << "- Type 2 to sort by surname" << endl
@@ -146,7 +151,10 @@ int main() {
             // Sort the structure
             sortOutput(studentGroup, fileOutputOption);
 
-            outputMedianAndAverage(studentGroup);
+            // outputMedianAndAverage(studentGroup); Commenting out for testing
+
+                // Get starting timepoint for separating students
+                auto startSeparatingStudents = high_resolution_clock::now();
 
             // "Bad" student group creation
             std::vector<structureTestVector> badStudent; // average < 5
@@ -173,6 +181,13 @@ int main() {
             /*cout << endl;
 
             outputMedianAndAverage(goodStudent);*/
+
+                // Get ending timepoint for separating students
+                auto stopSeparatingStudents = high_resolution_clock::now();
+
+
+                // Get starting timepoint for creating separate files
+                auto startCreatingFiles = high_resolution_clock::now();
 
             // Create file for "bad" students
             ofstream fileBad("bad_students");
@@ -205,6 +220,26 @@ int main() {
             cout << "File 'good_students' created successfully. 'good_students' contains students which passed the course (average grade more than or equal to 5)." << endl;
 
             fileGood.close();
+
+                // Get ending timepoint for creating separate files
+                auto stopCreatingFiles = high_resolution_clock::now();
+
+            auto durationReadingFile = duration_cast<microseconds>(stopReadingFile - startReadingFile);
+            double secondsReadingFile = durationReadingFile.count() / 1000000.0;
+
+            auto durationSeparatingStudents = duration_cast<microseconds>(stopSeparatingStudents - startSeparatingStudents);
+            double secondsSeparatingStudents = durationSeparatingStudents.count() / 1000000.0;
+
+            auto durationCreatingFiles = duration_cast<microseconds>(stopCreatingFiles - startCreatingFiles);
+            double secondsCreatingFiles = durationCreatingFiles.count() / 1000000.0;
+
+
+            cout << "SPEED TEST RESULTS" << endl;
+            cout << "Variables from file read in " << durationReadingFile.count() << " microseconds." << "  Converted to seconds: " << secondsReadingFile << endl;
+            cout << "Students separated to two groups in: " << durationSeparatingStudents.count() << " microseconds." << "  Converted to seconds: " << secondsSeparatingStudents << endl;
+            cout << "New student files created in: " << durationCreatingFiles.count() << " microseconds." << "  Converted to seconds: " << secondsCreatingFiles << endl;
+
+
 
             } // 4th option finished
 
