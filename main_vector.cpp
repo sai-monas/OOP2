@@ -159,28 +159,17 @@ int main() {
             // "Bad" student group creation
             std::vector<structureTestVector> badStudent; // average < 5
 
-            for (auto i: studentGroup) {
-                if (i.averageGrade < 5) {
-                    badStudent.push_back(i);
-                }
-            }
-
-            /*cout << endl;
-
-            outputMedianAndAverage(badStudent);*/
-
             // "Good" student group creation
             std::vector<structureTestVector> goodStudent; // average >= 5
 
             for (auto i: studentGroup) {
-                if (i.averageGrade >= 5) {
+                if (i.averageGrade < 5) {
+                    badStudent.push_back(i);
+                }
+                else {
                     goodStudent.push_back(i);
                 }
             }
-
-            /*cout << endl;
-
-            outputMedianAndAverage(goodStudent);*/
 
                 // Get ending timepoint for separating students
                 auto stopSeparatingStudents = high_resolution_clock::now();
