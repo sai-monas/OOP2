@@ -137,8 +137,9 @@ int main() {
                 // Get ending timepoint for file reading
                 auto stopReadingFile = high_resolution_clock::now();
 
+            // Commenting out sorting choice for testing purposes
             // Sorting option menu
-            cout << "Would you like to sort the results by name, surname, average grade or median grade?" << endl;
+            /*cout << "Would you like to sort the results by name, surname, average grade or median grade?" << endl;
             cout << "- Type 1 to sort by name" << endl << "- Type 2 to sort by surname" << endl
                 << "- Type 3 to sort by average grade" << endl  << "- Type 4 to sort by median grade" << endl
                 << "- Type 5 to skip sorting" << endl;
@@ -147,10 +148,18 @@ int main() {
             do {
                 cout << "Waiting for your answer: ";
                 cin >> fileOutputOption;
-            } while (validateInputOption(fileOutputOption) == false);
+            } while (validateInputOption(fileOutputOption) == false); */
+
+            fileOutputOption = 3; // Sorting by average for testing
+
+                // Get starting timepoint for sorting
+                auto startSortingStudents = high_resolution_clock::now();
 
             // Sort the structure
             sortOutputList(studentGroupList, fileOutputOption);
+
+                // Get ending timepoint for sorting
+                auto stopSortingStudents = high_resolution_clock::now();
 
             // outputMedianAndAverage(studentGroup); Commenting out for testing
 
@@ -175,10 +184,6 @@ int main() {
 
                 // Get ending timepoint for separating students
                 auto stopSeparatingStudents = high_resolution_clock::now();
-
-
-                // Get starting timepoint for creating separate files
-                auto startCreatingFiles = high_resolution_clock::now();
 
             // Create file for "bad" students
             ofstream fileBad("bad_students");
@@ -212,24 +217,20 @@ int main() {
 
             fileGood.close();
 
-                // Get ending timepoint for creating separate files
-                auto stopCreatingFiles = high_resolution_clock::now();
-
             auto durationReadingFile = duration_cast<microseconds>(stopReadingFile - startReadingFile);
             double secondsReadingFile = durationReadingFile.count() / 1000000.0;
-
+    
+            auto durationSortingStudents = duration_cast<microseconds>(stopSortingStudents - startSortingStudents);
+            double secondsSortingStudents = durationSortingStudents.count() / 1000000.0;
+    
             auto durationSeparatingStudents = duration_cast<microseconds>(stopSeparatingStudents - startSeparatingStudents);
             double secondsSeparatingStudents = durationSeparatingStudents.count() / 1000000.0;
-
-            auto durationCreatingFiles = duration_cast<microseconds>(stopCreatingFiles - startCreatingFiles);
-            double secondsCreatingFiles = durationCreatingFiles.count() / 1000000.0;
-
-
+    
+    
             cout << "SPEED TEST RESULTS" << endl;
             cout << "Variables from file read in " << durationReadingFile.count() << " microseconds." << "  Converted to seconds: " << secondsReadingFile << endl;
+            cout << "Students sorted in: " << durationSortingStudents.count() << " microseconds." << "  Converted to seconds: " << secondsSortingStudents << endl;
             cout << "Students separated to two groups in: " << durationSeparatingStudents.count() << " microseconds." << "  Converted to seconds: " << secondsSeparatingStudents << endl;
-            cout << "New student files created in: " << durationCreatingFiles.count() << " microseconds." << "  Converted to seconds: " << secondsCreatingFiles << endl;
-
 
 
             } // 4th option finished
