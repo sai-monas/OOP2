@@ -175,7 +175,7 @@ void generateFile(std::string name) {
     } while (check.inputOkay == false);
 
     // Get starting timepoint for speedtest
-    // auto startFileGeneration = high_resolution_clock::now(); <- Uncomment for testing
+    // auto startFileGeneration = high_resolution_clock::now(); // <- Uncomment for testing
 
     file << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde";
     for (int i = 1; i <= std::stoi(gradeAmount); i++) {
@@ -193,9 +193,9 @@ void generateFile(std::string name) {
 
     file.close();
 
-    /* Uncomment for testing
+    //Uncomment for testing
     // Get ending timepoint for speedtest
-    auto stopFileGeneration = high_resolution_clock::now();
+    /*auto stopFileGeneration = high_resolution_clock::now();
 
     // Get time taken for file generation in seconds
     auto durationFileGeneration = duration_cast<microseconds>(stopFileGeneration - startFileGeneration);
@@ -205,7 +205,7 @@ void generateFile(std::string name) {
     cout << "Amount of class grades for each student: " << std::stoi(gradeAmount) << endl;
     cout << "File generated in " << durationFileGeneration.count() << " microseconds." << endl;
     double secondsFileGeneration = durationFileGeneration.count() / 1000000.0;
-    cout << "Converted to seconds: " << secondsFileGeneration << endl; */
+    cout << "Converted to seconds: " << secondsFileGeneration << endl;*/
 };
 
 bool validateOutputOption(std::string output) {
