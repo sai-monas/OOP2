@@ -324,6 +324,22 @@ void sortOutput(std::vector<structureTestVector> &students, int option) {
     }
 }
 
+// For list version
+void sortOutputList(list<structureTestVector> &students, int option) {
+    if (option == 1) {
+        students.sort(sortByName);
+    }
+    else if (option == 2) {
+        students.sort(sortBySurname);
+    }
+    else if (option == 3) {
+        students.sort(sortByAverage);
+    }
+    else if (option == 4) {
+        students.sort(sortByMedian);
+    }
+}
+
 bool sortByName(structureTestVector& s1, structureTestVector& s2) {
     return s1.name < s2.name;
 }

@@ -20,6 +20,10 @@ using std::ofstream;
 #include <chrono>
 using namespace std::chrono;
 
+// For list
+#include <list>
+using std::list;
+
 using std::cout;
 using std::cin;
 using std::endl;
@@ -73,6 +77,7 @@ int generateRandomGrade();
 int generateRandomNumber();
 structureTestVector parseStudentInfo(std::string& line);
 void sortOutput(std::vector<structureTestVector> &students, int option);
+void sortOutputList(list<structureTestVector> &students, int option);
 bool sortByName(structureTestVector& s1, structureTestVector& s2);
 bool sortBySurname(structureTestVector& s1, structureTestVector& s2);
 bool sortByAverage(structureTestVector& s1, structureTestVector& s2);
