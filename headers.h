@@ -24,6 +24,10 @@ using namespace std::chrono;
 #include <list>
 using std::list;
 
+// For deque
+#include <deque>
+using std::deque;
+
 using std::cout;
 using std::cin;
 using std::endl;
@@ -78,6 +82,7 @@ int generateRandomNumber();
 structureTestVector parseStudentInfo(std::string& line);
 void sortOutput(std::vector<structureTestVector> &students, int option);
 void sortOutputList(list<structureTestVector> &students, int option);
+void sortOutputDeque(deque<structureTestVector> &students, int option);
 bool sortByName(structureTestVector& s1, structureTestVector& s2);
 bool sortBySurname(structureTestVector& s1, structureTestVector& s2);
 bool sortByAverage(structureTestVector& s1, structureTestVector& s2);

@@ -340,6 +340,22 @@ void sortOutputList(list<structureTestVector> &students, int option) {
     }
 }
 
+// For deque version
+void sortOutputDeque(deque<structureTestVector> &students, int option) {
+    if (option == 1) {
+        std::sort(students.begin(), students.end(), sortByName);
+    }
+    else if (option == 2) {
+        std::sort(students.begin(), students.end(), sortBySurname);
+    }
+    else if (option == 3) {
+        std::sort(students.begin(), students.end(), sortByAverage);
+    }
+    else if (option == 4) {
+        std::sort(students.begin(), students.end(), sortByMedian);
+    }
+}
+
 bool sortByName(structureTestVector& s1, structureTestVector& s2) {
     return s1.name < s2.name;
 }
