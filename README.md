@@ -177,6 +177,6 @@
 
 - CPU - Intel(R) Core(TM) i7-14700HX
 - RAM - 16 GB
-- SSD
+- SSD (NVMe)
 
 ### Visi duomenys: https://docs.google.com/spreadsheets/d/1-jWgfcVoi0Piz3YIMO9YADxN77jUyhKHUNEyebXa848/edit?usp=sharing
