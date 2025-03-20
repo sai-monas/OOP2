@@ -55,6 +55,14 @@
 
 ![image](https://github.com/user-attachments/assets/e2095aac-e464-4034-ae49-20e43bea67da)
 
+| Studentų skaičius | Namų darbų įvertinimų skaičius | Greitis (s) |
+| :------------- | :------------- | :------------- |
+| 1000000 | 15 | 5.77697 |
+| 1000000 | 20 | 3.57288 |
+| 1000000 | 25 | 3.92783 |
+| 1000000 | 30 | 4.31643 |
+| 1000000 | 35 | 8.11556 |
+
 ### 2.1 Atvejis - darbas su egzistuojančiais failais (duomenų apdorojimo greičio testavimas)
 
 **Nuotraukos iš pirmo testavimo**
