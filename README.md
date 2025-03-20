@@ -163,4 +163,8 @@
 | `std::list` | 10000000 | 10 | 4.11246 |
 | `std::deque` | 10000000 | 10 | 2.966826666666667 |
 
+- Naudojant std::deque tipo konteinerius duomenys buvo išskirstyti greičiausiai
+- Naudojant std::list tipo konteinerius duomenys buvo išskirstyti lėčiausiai
+- Duomenų skirstymo greičio vidurkio skirtumas tarp šių konteinerių buvo ~1.146 sekundės
+
 ### Visi duomenys: https://docs.google.com/spreadsheets/d/1-jWgfcVoi0Piz3YIMO9YADxN77jUyhKHUNEyebXa848/edit?usp=sharing
