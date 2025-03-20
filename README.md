@@ -143,7 +143,7 @@
 - Naudojant std::deque tipo konteinerius duomenys buvo išrūšiuoti lėčiausiai
 - Duomenų rūšiavimo greičio vidurkio skirtumas tarp šių konteinerių buvo ~3.908 sekundės
 
-### 3.2 Atvejis - duomenų skirstymo pagal 2-i kategorijas greičio matavimas std::vector, std::list ir std::deque konteineriuose
+### 3.3 Atvejis - duomenų skirstymo pagal 2-i kategorijas greičio matavimas std::vector, std::list ir std::deque konteineriuose
 
 | Konteinerio tipas | Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
 | :------------- | :------------- | :------------- | :------------- |
@@ -172,5 +172,11 @@
 | :1st_place_medal: | `std::list` | 41.50432333333333 |
 | :2nd_place_medal: | `std::vector` | 42.37962000000001 |
 | :3rd_place_medal: | `std::deque` | 43.35949333333334 |
+
+## Testavimui naudotos sistemos specifikacijos
+
+- CPU - Intel(R) Core(TM) i7-14700HX
+- RAM - 16 GB
+- SSD
 
 ### Visi duomenys: https://docs.google.com/spreadsheets/d/1-jWgfcVoi0Piz3YIMO9YADxN77jUyhKHUNEyebXa848/edit?usp=sharing
