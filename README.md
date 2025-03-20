@@ -92,19 +92,19 @@
 | Konteinerio tipas | Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
 | :------------- | :------------- | :------------- | :------------- |
 | `std::vector` | 1000 | 10 | 0.005746 |
-| `std::list` | 1000 | 10 |
+| `std::list` | 1000 | 10 | 0.0065286666666667 |
 | `std::deque` | 1000 | 10 |
 | `std::vector` | 10000 | 10 | 0.030343 |
-| `std::list` | 10000 | 10 |
+| `std::list` | 10000 | 10 | 0.0307806666666667 |
 | `std::deque` | 10000 | 10 |
 | `std::vector` | 100000 | 10 | 0.2678933333333333 |
-| `std::list` | 100000 | 10 |
+| `std::list` | 100000 | 10 | 0.2847606666666667 |
 | `std::deque` | 100000 | 10 |
 | `std::vector` | 1000000 | 10 | 2.606556666666667 |
-| `std::list` | 1000000 | 10 |
+| `std::list` | 1000000 | 10 | 2.84913 |
 | `std::deque` | 1000000 | 10 |
 | `std::vector` | 10000000 | 10 | 26.72416666666667 |
-| `std::list` | 10000000 | 10 |
+| `std::list` | 10000000 | 10 | 28.15683333333333 |
 | `std::deque` | 10000000 | 10 |
 
 ### 3.2 Atvejis - duomenų rūšiavimo greičio matavimas std::vector, std::list ir std::deque konteineriuose
@@ -112,19 +112,19 @@
 | Konteinerio tipas | Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
 | :------------- | :------------- | :------------- | :------------- |
 | `std::vector` | 1000 | 10 | 0.000694 |
-| `std::list` | 1000 | 10 |
+| `std::list` | 1000 | 10 | 0.000313 |
 | `std::deque` | 1000 | 10 |
 | `std::vector` | 10000 | 10 | 0.0136056666666667 |
-| `std::list` | 10000 | 10 |
+| `std::list` | 10000 | 10 | 0.001797 |
 | `std::deque` | 10000 | 10 |
 | `std::vector` | 100000 | 10 | 0.0755466666666667 |
-| `std::list` | 100000 | 10 |
+| `std::list` | 100000 | 10 | 0.025837 |
 | `std::deque` | 100000 | 10 |
 | `std::vector` | 1000000 | 10 | 0.9694076666666667 |
-| `std::list` | 1000000 | 10 |
+| `std::list` | 1000000 | 10 | 0.5147113333333333 |
 | `std::deque` | 1000000 | 10 |
 | `std::vector` | 10000000 | 10 | 12.11376666666667 |
-| `std::list` | 10000000 | 10 |
+| `std::list` | 10000000 | 10 | 9.23503 |
 | `std::deque` | 10000000 | 10 |
 
 ### 3.2 Atvejis - duomenų skirstymo pagal 2-i kategorijas greičio matavimas std::vector, std::list ir std::deque konteineriuose
@@ -132,19 +132,19 @@
 | Konteinerio tipas | Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
 | :------------- | :------------- | :------------- | :------------- |
 | `std::vector` | 1000 | 10 | 0.000445 |
-| `std::list` | 1000 | 10 |
+| `std::list` | 1000 | 10 | 0.00047 |
 | `std::deque` | 1000 | 10 |
 | `std::vector` | 10000 | 10 | 0.0115656666666667 |
-| `std::list` | 10000 | 10 |
+| `std::list` | 10000 | 10 | 0.002505 |
 | `std::deque` | 10000 | 10 |
 | `std::vector` | 100000 | 10 | 0.0278643333333333 |
-| `std::list` | 100000 | 10 |
+| `std::list` | 100000 | 10 | 0.0293103333333333 |
 | `std::deque` | 100000 | 10 |
 | `std::vector` | 1000000 | 10 | 0.3366546666666667 |
-| `std::list` | 1000000 | 10 |
+| `std::list` | 1000000 | 10 | 0.4141273333333333 |
 | `std::deque` | 1000000 | 10 |
 | `std::vector` | 10000000 | 10 | 3.541686666666667 |
-| `std::list` | 10000000 | 10 |
+| `std::list` | 10000000 | 10 | 4.11246 |
 | `std::deque` | 10000000 | 10 |
 
 ### Visi duomenys: https://docs.google.com/spreadsheets/d/1-jWgfcVoi0Piz3YIMO9YADxN77jUyhKHUNEyebXa848/edit?usp=sharing
