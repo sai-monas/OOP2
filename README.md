@@ -115,6 +115,10 @@
 | `std::list` | 10000000 | 10 | 28.15683333333333 |
 | `std::deque` | 10000000 | 10 | 27.24956666666667 |
 
+- Naudojant std::vector tipo konteinerius duomenys buvo nuskaityti greičiausiai (~)
+- Naudojant std::list tipo konteinerius duomenys buvo nuskaityti lėčiausiai
+- Duomenų nuskaitymo greičio vidurkio skirtumas tarp šių konteinerių buvo 1.433 sekundės
+
 ### 3.2 Atvejis - duomenų rūšiavimo greičio matavimas std::vector, std::list ir std::deque konteineriuose
 
 | Konteinerio tipas | Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
