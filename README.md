@@ -167,4 +167,10 @@
 - Naudojant std::list tipo konteinerius duomenys buvo išskirstyti lėčiausiai
 - Duomenų skirstymo greičio vidurkio skirtumas tarp šių konteinerių buvo ~1.146 sekundės
 
+| Vieta | Konteinerio tipas | Visų užduočių greičio vidurkis (s) |
+| :------------- | :------------- | :------------- |
+| :1st_place_medal: | `std::list` | 41.50432333333333 |
+| :2nd_place_medal: | `std::vector` | 42.37962000000001 |
+| :3rd_place_medal: | `std::deque` | 43.35949333333334 |
+
 ### Visi duomenys: https://docs.google.com/spreadsheets/d/1-jWgfcVoi0Piz3YIMO9YADxN77jUyhKHUNEyebXa848/edit?usp=sharing
