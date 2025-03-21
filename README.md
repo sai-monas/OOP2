@@ -173,6 +173,26 @@
 | :2nd_place_medal: | `std::vector` | 42.37962000000001 |
 | :3rd_place_medal: | `std::deque` | 43.35949333333334 |
 
+### 4.1 Atvejis - duomenų skirstymo greitis panaudojant tik vieną naują std::vector, std::list ar std::deque tipo konteinerį
+
+| Konteinerio tipas | Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
+| :------------- | :------------- | :------------- | :------------- |
+| `std::vector` | 1000 | 10 | 0.005579 |
+| `std::list` | 1000 | 10 |
+| `std::deque` | 1000 | 10 |
+| `std::vector` | 10000 | 10 | 0.4383373333333333 |
+| `std::list` | 10000 | 10 |
+| `std::deque` | 10000 | 10 |
+| `std::vector` | 100000 | 10 | 44.60456666666667 |
+| `std::list` | 100000 | 10 |
+| `std::deque` | 100000 | 10 |
+| `std::vector` | 1000000 | 10 | - |
+| `std::list` | 1000000 | 10 |
+| `std::deque` | 1000000 | 10 |
+| `std::vector` | 10000000 | 10 | - |
+| `std::list` | 10000000 | 10 |
+| `std::deque` | 10000000 | 10 |
+
 ## Testavimui naudotos sistemos specifikacijos
 
 - CPU - Intel(R) Core(TM) i7-14700HX
