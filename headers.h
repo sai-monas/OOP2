@@ -33,7 +33,7 @@ using std::cin;
 using std::endl;
 using std::count;
 
-
+#include <cstdio>
 struct structureTestVector {
     std::string name;
     std::string surname;
@@ -63,6 +63,7 @@ struct structureBoolInt {
 
 
 // Functions
+bool isLessThanFive(structureTestVector st);
 double calculateAverageGrade(int sum, int count);
 double calculateMedianGrade(std::vector<int> grades, int exam);
 void outputMedianOrAverage(std::vector<structureTestVector> students, std::string choice);

@@ -166,7 +166,7 @@ int main() {
                 auto startSeparatingStudents = high_resolution_clock::now();
 
             // "Bad" student group creation
-            std::vector<structureTestVector> badStudent; // average < 5
+            //std::vector<structureTestVector> badStudent; // average < 5
 
             // "Good" student group creation
             //std::vector<structureTestVector> goodStudent; // average >= 5 // <- Commenting out for further tests
@@ -182,14 +182,19 @@ int main() {
             }*/
 
             // 2nd strategy - leaving "good" students in default student group (studentGroup), and moving the "bad" students to a separate container
-            int keepingCountForSeparating = 0;
+            /*int keepingCountForSeparating = 0;
             for (auto i: studentGroup) {
                 if (i.averageGrade < 5.0) {
                     badStudent.push_back(i);
                     keepingCountForSeparating++;
                 }
             }
-            studentGroup.erase(studentGroup.begin(), studentGroup.begin() + keepingCountForSeparating);
+            studentGroup.erase(studentGroup.begin(), studentGroup.begin() + keepingCountForSeparating);*/
+
+
+            auto it = std::stable_partition(studentGroup.begin(), studentGroup.end(), isLessThanFive);
+            std::vector<structureTestVector> badStudent(std::make_move_iterator(it), std::make_move_iterator(studentGroup.end()));
+            studentGroup.erase(it, studentGroup.end());
 
                 // Get ending timepoint for separating students
                 auto stopSeparatingStudents = high_resolution_clock::now();

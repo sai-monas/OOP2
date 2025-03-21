@@ -5,6 +5,10 @@ structureBoolInt gradeCheck;
 structureBoolInt check;
 structureTestVector tempStudent;
 
+bool isLessThanFive(structureTestVector st) {
+    return (st.averageGrade >= 5);
+}
+
 double calculateAverageGrade(int sum, int count) {
     double average = static_cast<double>(sum)/(count);
     return average;
