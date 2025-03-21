@@ -178,19 +178,19 @@
 | Konteinerio tipas | Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
 | :------------- | :------------- | :------------- | :------------- |
 | `std::vector` | 1000 | 10 | 0.000316 |
-| `std::list` | 1000 | 10 |
+| `std::list` | 1000 | 10 | 0.0002256 |
 | `std::deque` | 1000 | 10 |
 | `std::vector` | 10000 | 10 | 0.00173 |
-| `std::list` | 10000 | 10 |
+| `std::list` | 10000 | 10 | 0.0014183 |
 | `std::deque` | 10000 | 10 |
 | `std::vector` | 100000 | 10 | 0.017883 |
-| `std::list` | 100000 | 10 |
+| `std::list` | 100000 | 10 | 0.0174226 |
 | `std::deque` | 100000 | 10 |
 | `std::vector` | 1000000 | 10 | 0.2571606 |
-| `std::list` | 1000000 | 10 |
+| `std::list` | 1000000 | 10 | 0.267454 |
 | `std::deque` | 1000000 | 10 |
 | `std::vector` | 10000000 | 10 | 2.773783 |
-| `std::list` | 10000000 | 10 |
+| `std::list` | 10000000 | 10 | 2.892786 |
 | `std::deque` | 10000000 | 10 |
 
 ## Testavimui naudotos sistemos specifikacijos
