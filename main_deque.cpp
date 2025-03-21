@@ -170,16 +170,27 @@ int main() {
             deque<structureTestVector> badStudent; // average < 5
 
             // "Good" student group creation
-            deque<structureTestVector> goodStudent; // average >= 5
+            //deque<structureTestVector> goodStudent; // average >= 5 // Commenting out for further tests
 
-            for (auto i: studentGroupDeque) {
+            // 1st strategy - creating two new containers for "good" and "bad" students
+            /*for (auto i: studentGroupDeque) {
                 if (i.averageGrade < 5) {
                     badStudent.push_back(i);
                 }
                 else {
                     goodStudent.push_back(i);
                 }
+            }*/
+
+            // 2nd strategy - leaving "good" students in default student group (studentGroup), and moving the "bad" students to a separate container
+            int keepingCountForSeparating = 0;
+            for (auto i: studentGroupDeque) {
+                if (i.averageGrade < 5.0) {
+                    badStudent.push_back(i);
+                    keepingCountForSeparating++;
+                }
             }
+            studentGroupDeque.erase(studentGroupDeque.begin(), studentGroupDeque.begin() + keepingCountForSeparating);
 
 
                 // Get ending timepoint for separating students
@@ -188,7 +199,6 @@ int main() {
 
             // Create file for "bad" students
             ofstream fileBad("bad_students");
-
             fileBad << firstLine << endl;
             for (auto n: badStudent) {
                 fileBad << std::left << std::setw(15) << n.name << std::setw(15) << n.surname;
@@ -203,10 +213,21 @@ int main() {
             fileBad.close();
 
 
-            // Create file for "good" students
-            ofstream fileGood("good_students");
+            // Create file for "good" students - 1st strategy
+            /*ofstream fileGood("good_students");
             fileGood << firstLine << endl;
             for (auto n: goodStudent) {
+                fileGood << std::left << std::setw(15) << n.name << std::setw(15) << n.surname;
+                for (int x = 0; x < n.gradeCount; x++) {
+                    fileGood << std::setw(6) << n.classGrade[x];
+                }
+                fileGood << std::setw(6) << n.examGrade << endl;
+            }*/
+
+            // Create file for "good" students - 2nd strategy
+            ofstream fileGood("good_students");
+            fileGood << firstLine << endl;
+            for (auto n: studentGroupDeque) {
                 fileGood << std::left << std::setw(15) << n.name << std::setw(15) << n.surname;
                 for (int x = 0; x < n.gradeCount; x++) {
                     fileGood << std::setw(6) << n.classGrade[x];
