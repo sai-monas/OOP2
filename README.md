@@ -1,5 +1,31 @@
 ## Objektinis programavimas 2025
 
+## "Releases" apžvalga
+
+### v.pradine - pre-release
+- Programa nuskaito vartotojų įvedamus studentų duomenis (vardą, pavardę, namų darbų ir egzamino pažymius), bei išveda studentus ir, pasirinktinai, jų pažymių medianas ar vidurkius į terminalą.
+- Naudojami std::vector tipo konteineriai.
+
+### v0.1
+- Yra galimybė studentų gautus pažymius generuoti atsitiktinai.
+- 2 programos versijos - code_testas.cpp naudoja std::vector tipo konteinerius, o code_array - array tipo konteinerius.
+
+### v0.2
+- Yra galimybė studentų duomenis nuskaityti iš vartotojų pateikiamų failų, ir pateikti terminale išrūšiuotus pagal vartotojo pasirinkimą
+- Naudojami std::vector tipo konteineriai
+
+### v0.3
+- Sukurtas naujas functions.cpp failas talpinantis funkcijas naudojamas pagrindiniame faile.
+
+### v0.4
+- Vartotojai turi galimybę atsitiktinai generuoti naujus failus su studentų duomenimis, ir juos apdoroti naudojant programą.
+- Studentai dabar rūšiuojami į 2 atskirus failus pagal jų pažymių vidurkį.
+
+### v1.0
+- Optimizuotas studentų skirstymas į 2 atskirus konteinerius.
+- Naudojami std::vector, std::list, std::deque tipo konteineriai (skirtinguose .cpp failuose).
+
+
 ## Testavimo rezultatai
 ### 1.1 Atvejis - failų generavimo greičio matavimas didinant tik studentų (eilučių) kiekį
 
