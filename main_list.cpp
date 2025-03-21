@@ -161,8 +161,6 @@ int main() {
                 // Get ending timepoint for sorting
                 auto stopSortingStudents = high_resolution_clock::now();
 
-            // outputMedianAndAverage(studentGroup); Commenting out for testing
-
                 // Get starting timepoint for separating students
                 auto startSeparatingStudents = high_resolution_clock::now();
 
@@ -170,18 +168,35 @@ int main() {
             list<structureTestVector> badStudent; // average < 5
 
             // "Good" student group creation
-            list<structureTestVector> goodStudent; // average >= 5
+            //list<structureTestVector> goodStudent; // average >= 5 // Commenting out for further tests
 
-            for (auto i: studentGroupList) {
+            // 1st strategy - creating two new containers for "good" and "bad" students
+            /*for (auto i: studentGroupList) {
                 if (i.averageGrade < 5) {
                     badStudent.push_back(i);
                 }
                 else {
                     goodStudent.push_back(i);
                 }
+            }*/
+
+            // 2nd strategy - leaving "good" students in default student group (studentGroupList), and moving the "bad" students to a separate container
+            std::list<structureTestVector>::iterator keepingCountTest = studentGroupList.begin();
+            for (auto i: studentGroupList) {
+                if (i.averageGrade < 5) {
+                    badStudent.push_back(i);
+                    studentGroupList.erase(keepingCountTest);
+                    if (keepingCountTest != studentGroupList.end()) {
+                        keepingCountTest++;
+                    }
+                }
+                else {
+                    if (keepingCountTest != studentGroupList.end()) {
+                        keepingCountTest++;
+                    }
+                }
             }
-
-
+            
                 // Get ending timepoint for separating students
                 auto stopSeparatingStudents = high_resolution_clock::now();
 
@@ -202,10 +217,21 @@ int main() {
             fileBad.close();
 
 
-            // Create file for "good" students
-            ofstream fileGood("good_students");
+            // Create file for "good" students - 1st strategy
+            /*ofstream fileGood("good_students");
             fileGood << firstLine << endl;
             for (auto n: goodStudent) {
+                fileGood << std::left << std::setw(15) << n.name << std::setw(15) << n.surname;
+                for (int x = 0; x < n.gradeCount; x++) {
+                    fileGood << std::setw(6) << n.classGrade[x];
+                }
+                fileGood << std::setw(6) << n.examGrade << endl;
+            }*/
+
+            // Create file for "good" students - 2nd strategy
+            ofstream fileGood("good_students");
+            fileGood << firstLine << endl;
+            for (auto n: studentGroupList) {
                 fileGood << std::left << std::setw(15) << n.name << std::setw(15) << n.surname;
                 for (int x = 0; x < n.gradeCount; x++) {
                     fileGood << std::setw(6) << n.classGrade[x];
