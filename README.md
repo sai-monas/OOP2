@@ -173,7 +173,7 @@
 | :2nd_place_medal: | `std::vector` | 42.37962000000001 |
 | :3rd_place_medal: | `std::deque` | 43.35949333333334 |
 
-### 4.1 Atvejis - duomenų skirstymo greitis panaudojant tik vieną naują std::vector, std::list ar std::deque tipo konteinerį
+### 4.1 Atvejis - duomenų skirstymo greičio matavimas panaudojant tik vieną naują std::vector, std::list ar std::deque tipo konteinerį
 
 | Konteinerio tipas | Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
 | :------------- | :------------- | :------------- | :------------- |
@@ -192,6 +192,21 @@
 | `std::vector` | 10000000 | 10 | 2.773783 |
 | `std::list` | 10000000 | 10 | 2.892786 |
 | `std::deque` | 10000000 | 10 | 2.32154 |
+
+- Kaip ir 3.3, matoma, kad duomenų skirstymas greičiausiai įvykdomas naudojant std::deque versiją
+- 4.1 implementuotas skirstymas funkcionalus tik su duomenimis iš anksto surūšiuotais pagal vidurkį
+
+### 4.2 Atvejis - duomenų skirstymo greičio matavimas panaudojant tik vieną naują std::vector konteinerį bei pritaikant skirtingiems rūšiavimams
+
+| Studentų skaičius | Namų darbų įvertinimų skaičius | Greičio vidurkis (s) |
+| :------------- | :------------- | :------------- |
+| 1000 | 10 | 0.000436 |
+| 10000 | 10 | 0.0023816 |
+| 100000 | 10 | 0.0227656 |
+| 1000000 | 10 | 0.2663453 |
+| 10000000 | 10 | 3.199913333333333 |
+
+- Šis atvejis yra greitesnis lyginant su 3.3 ir 4.1 versijomis
 
 ## Testavimui naudotos sistemos specifikacijos
 
