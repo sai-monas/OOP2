@@ -169,7 +169,7 @@ int main() {
             std::vector<structureTestVector> badStudent; // average < 5
 
             // "Good" student group creation
-            // std::vector<structureTestVector> goodStudent; // average >= 5 // <- Commenting out for further tests
+            //std::vector<structureTestVector> goodStudent; // average >= 5 // <- Commenting out for further tests
 
             // 1st strategy - creating two new containers for "good" and "bad" students
             /*for (auto i: studentGroup) {
@@ -182,24 +182,20 @@ int main() {
             }*/
 
             // 2nd strategy - leaving "good" students in default student group (studentGroup), and moving the "bad" students to a separate container
-            int keepingCountTest = 0;
+            int keepingCountForSeparating = 0;
             for (auto i: studentGroup) {
-                if (i.averageGrade < 5) {
+                if (i.averageGrade < 5.0) {
                     badStudent.push_back(i);
-                    studentGroup.erase(studentGroup.begin() + keepingCountTest);
-                    keepingCountTest++;
-                }
-                else {
-                    keepingCountTest++;
+                    keepingCountForSeparating++;
                 }
             }
+            studentGroup.erase(studentGroup.begin(), studentGroup.begin() + keepingCountForSeparating);
 
                 // Get ending timepoint for separating students
                 auto stopSeparatingStudents = high_resolution_clock::now();
 
             // Create file for "bad" students
             ofstream fileBad("bad_students");
-
             fileBad << firstLine << endl;
             for (auto n: badStudent) {
                 fileBad << std::left << std::setw(15) << n.name << std::setw(15) << n.surname;
