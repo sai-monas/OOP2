@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.25)
+project(Student_Calculator)
+include_directories(headers.h)
+file(GLOB SOURCES "src/*.cpp")
+add_executable(StudentCalculator ${SOURCES})
