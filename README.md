@@ -25,6 +25,12 @@
 - Optimizuotas studentų skirstymas į 2 atskirus konteinerius.
 - Naudojami std::vector, std::list, std::deque tipo konteineriai (skirtinguose .cpp failuose).
 
+## Naudojimosi instrukcijos
+- Paleidę programą galėsite pasirinkti tarp 4 pagrindinių duomenų įvesties būdų - rankinio, pusiau rankinio, pilnos atsitiktinės generacijos, ar darbo su failu.
+- Pasirinkus 1-ąjį būdą, visus studentų duomenis turėsite įvesti ranka. Norint nutraukti pažymių įvestį reikia įrašyti 0, o baigus studentų įvestį - X.
+- Pasirinkus 2-ąjį būdą, programoje turėsite įvesti norimą skaičių sugeneruotų pažymių. Studentų įvesties baigčiai vėl gi turėsite įvesti X.
+- Pasirinkus 3-iąjį būdą, programoje turėsite įvesti norimą skaičių sugeneruotų studentų ir jų pažymių.
+- Pasirinkus 4-ąjį būdą galėsite arba generuoti failą su atsitiktinais duomenimis, arba pateikti savo.
 
 ## Testavimo rezultatai
 ### 1.1 Atvejis - failų generavimo greičio matavimas didinant tik studentų (eilučių) kiekį
