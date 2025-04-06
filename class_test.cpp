@@ -126,9 +126,13 @@ class Student {
         void setClassGrades(std::vector<int> cl) {
             classGrade = cl;
         };
-    ~Student() {
-        //cout << "Destructor called" << endl;
-    };
+        void printAverageAndMedian() {
+            cout << std::left << std::setw(15) << getName() << " " << std::setw(15) << getSurname() << " " <<
+                std::setw(9) << std::setprecision(3) << calculateAverage() << std::setw(9) << std::setprecision(3) << calculateMedian() << endl;
+        }
+        ~Student() {
+            //cout << "Destructor called" << endl;
+        };
 };
 
 std::vector<Student> students;
@@ -204,13 +208,12 @@ void sortOutput(std::vector<Student> &students, int option) {
         // Close the file
         file.close();
 
-        sortOutput(students, 3);
+        sortOutput(students, 4);
 
 
         cout << "Name            Surname         Average  Median" << endl << "-------------------------------------------------" << endl;
         for (auto y :students){
-        cout << std::left << std::setw(15) << y.getName() << " " << std::setw(15) << y.getSurname() << " " <<
-         std::setw(9) << std::setprecision(3) << y.calculateAverage() << std::setw(9) << std::setprecision(3) << y.calculateMedian() << endl;
+            y.printAverageAndMedian();
         }
 
 
