@@ -37,6 +37,8 @@ using std::count;
 
 #include <cstdio>
 
+structureBoolInt gradeCheckClass;
+
 class Student {
     // realizacija
     private:
@@ -132,6 +134,45 @@ class Student {
         void printAverageAndMedian() {
             cout << std::left << std::setw(15) << getName() << " " << std::setw(15) << getSurname() << " " <<
                 std::setw(9) << std::setprecision(3) << calculateAverage() << std::setw(9) << std::setprecision(3) << calculateMedian() << endl;
+        }
+        void printAverage() {
+            cout << std::left << std::setw(15) << getName() << " " << std::setw(15) << getSurname() << " " <<
+                std::setw(9) << std::setprecision(3) << calculateAverage() << endl;
+        }
+        void printMedian() {
+            cout << std::left << std::setw(15) << getName() << " " << std::setw(15) << getSurname() << " " <<
+                std::setw(9) << std::setprecision(3) << calculateMedian() << endl;
+        }
+        void inputExamGrade() {
+            /*std::string stringExamGrade;
+            do {
+                cout << "Input student's exam grade: ";
+                cin >> stringExamGrade;
+                validateNumber(stringExamGrade);
+            } while (gradeCheckClass.inputOkay == false);
+
+            // Accept the exam grade
+            examGrade = gradeCheckClass.validatedNumber;*/
+            cin >> examGrade;
+        }
+        void inputClassGrades() {
+            cout << "- Please type 0 for the grade if you do not have any remaining grades left" << endl;
+            int grade;
+            int gradeCount = -1;
+            while (grade != 0) {
+                gradeCount++;
+                cout << "Enter grade " << gradeCount + 1 << ": " << endl;
+                cin >> grade;
+
+            // Accept the class grade
+            classGrade.push_back(grade);
+            };
+            if (getClassGrade()[gradeCount] = 0) {
+                classGrade.pop_back();
+            }
+        }
+        void clearGrades() {
+            classGrade.clear();
         }
         ~Student() {
             //cout << "Destructor called" << endl;
@@ -334,11 +375,6 @@ void sortOutputClass(std::vector<Student> &students, int option) {
             // Close the file
             file.close();
 
-            cout << endl << endl << "Obce davai egzo rezultatai: " << endl << endl;
-            for (auto i: students) {
-                cout << i.getExamGrade() << endl;
-            };
-
                 // Get ending timepoint for file reading
                 auto stopReadingFile = high_resolution_clock::now();
 
@@ -440,7 +476,6 @@ void sortOutputClass(std::vector<Student> &students, int option) {
                     fileGood << std::setw(6) << n.getClassGrade()[x];
                 }
                 fileGood << std::setw(6) << n.getExamGrade() << endl;
-                cout << n.getExamGrade() << endl;
             }
 
             cout << "File 'good_students' created successfully. 'good_students' contains students which passed the course (average grade more than or equal to 5)." << endl;
@@ -464,9 +499,12 @@ void sortOutputClass(std::vector<Student> &students, int option) {
 
             } // 4th option finished
 
-        /*
         // 1st, 2nd and 3rd options
         if ((inputOption == 1) || (inputOption == 2) || (inputOption == 3)) {
+
+            Student st;
+            std::string nm;
+            std::string srn;
 
             if (inputOption == 3) {
                 // Check amount of students to generate for full generation option
@@ -476,20 +514,21 @@ void sortOutputClass(std::vector<Student> &students, int option) {
 
             // Collect inputs
             // While clause only relevant for 1st and 2nd options
-            while (student.name !=  "x" || student.name != "X") {
+            while (st.getName() !=  "x" || st.getName() != "X") {
         
         
             // Get student's first name for 1st and 2nd options
             if ((inputOption == 1) || (inputOption == 2)) {
                 cout << "- Please type X for the student name if you do not have any remaining students left." << endl;
                 cout << "Input student name: ";
-                cin >> student.name;
+                cin >> nm;
+                st.setName(nm);
             }
             else {
                 // Track number of students (and their grades) already generated
                 keepingStudentCount += 1;
                 if (keepingStudentCount <= studentCount) {
-                    student.name = randomNames[generateRandomNumber()];
+                    st.setName(randomNames[generateRandomNumber()]);
                 }
                 else {
                     generationFinished = true;
@@ -497,7 +536,7 @@ void sortOutputClass(std::vector<Student> &students, int option) {
             }
 
             // Check if user wants to exit program for 1st & 2nd options
-            if (student.name == "x" || student.name == "X") {
+            if (st.getName() == "x" || st.getName() == "X") {
                 cout << "<< Student input finished >>" << endl;
                 break;
             }
@@ -511,52 +550,49 @@ void sortOutputClass(std::vector<Student> &students, int option) {
             // Get student's last name
             if ((inputOption == 1) || (inputOption == 2)) {
                 cout << "Input student surname: ";
-                cin >> student.surname;
+                cin >> srn;
+                st.setSurname(srn);
             }
             else {
-                student.surname = randomSurnames[generateRandomNumber()];
-                cout << "Student " << keepingStudentCount << " is: " << student.name << " " << student.surname << endl;
+                st.setSurname(randomSurnames[generateRandomNumber()]);
+                cout << "Student " << keepingStudentCount << " is: " << st.getName() << " " << st.getSurname() << endl;
             }
 
             // Ask for exam grade for 1st option
             if (inputOption == 1) {
-                student.examGrade = collectExamGrade();
+                cout << "Input student exam grade: ";
+                st.inputExamGrade();
             }
             // Generate exam grade for 2nd & 3rd options
             else {
                 cout << "Exam grade is: ";
-                student.examGrade = generateRandomGrade();
-                cout << student.examGrade << endl;
+                st.setExamGrade(generateRandomGrade());
+                cout << st.getExamGrade() << endl;
             }
 
             // Ask for class grades for 1st option
             if (inputOption == 1) {
 
                 // Collect student's class grades
-                student.classGrade = collectClassGrade();
+                st.inputClassGrades();
 
                 // Remove last element (0) from vector
-                student.classGrade.pop_back();
+                //student.classGrade.pop_back();
             }
             else {
-                student.classGrade = generateClassGrades();
+                st.setClassGrades(generateClassGrades());
             }
 
-            //Add 1 to grade count to account for exam grade
-            student.gradeCount = (student.classGrade.size() + 1);
+            cout << "<< Class grade input finished for " << st.getName() << " >>" << endl;
 
-            // Calculate average of grades
-            student.averageGrade = calculateAverageGrade((calculateSum(student.classGrade) + student.examGrade), student.gradeCount);
+            students.push_back(st);
 
-            // Calculate median of grades
-            student.medianGrade = calculateMedianGrade(student.classGrade, student.examGrade);
+            st.clearGrades();
 
-            cout << "<< Class grade input finished for " << student.name << " >>" << endl;
-
-            studentGroup.push_back({student});
+        }
 
             // Clear out variables
-            student.classGrade.clear();
+            //student.classGrade.clear();
         } // While loop finished
 
         cout << "<< Student data collection finished >>" << endl;
@@ -566,9 +602,20 @@ void sortOutputClass(std::vector<Student> &students, int option) {
             cin >> outputOption;
         } while (validateOutputOption(outputOption) == false); // Check that chosen output option is M (m) or A (a)
         // Print chosen output
-        outputMedianOrAverage(studentGroup, outputOption);
-    } // 1st, 2nd and 3rd options finished
-    */
+        cout << "Name            Surname         Average " << endl << "-------------------------------------------------" << endl;
+        if (outputOption == "M" || outputOption == "m") {
+            for (auto y :students){
+                y.printMedian();
+            }
+            }
+        // Average output
+        else if (outputOption == "A" || outputOption == "a") {
+            for (auto y :students){
+                y.printAverage();
+            }
+            }
+        
+    // 1st, 2nd and 3rd options finished
 
     return 0;
     }

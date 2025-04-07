@@ -34,6 +34,7 @@ using std::endl;
 using std::count;
 
 #include <cstdio>
+
 struct structureTestVector {
     std::string name;
     std::string surname;

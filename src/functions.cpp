@@ -89,6 +89,7 @@ std::vector<int> collectClassGrade() {
          // Accept the class grade
          grades.push_back(gradeCheck.validatedNumber);
     };
+    //grades.pop_back(); // For class version
     return grades;
 }
 
@@ -146,6 +147,7 @@ structureBoolInt validateNumber(std::string count) {
 
 std::vector<int> generateClassGrades() {
     std::vector<int> grades;
+    grades.clear();
     std::string gradeCount;
     cout << "Type the amount of grades you wish to generate: ";
     do {
