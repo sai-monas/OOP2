@@ -589,10 +589,6 @@ void sortOutputClass(std::vector<Student> &students, int option) {
 
             st.clearGrades();
 
-        }
-
-            // Clear out variables
-            //student.classGrade.clear();
         } // While loop finished
 
         cout << "<< Student data collection finished >>" << endl;
@@ -614,8 +610,8 @@ void sortOutputClass(std::vector<Student> &students, int option) {
                 y.printAverage();
             }
             }
-        
-    // 1st, 2nd and 3rd options finished
+
+        } // 1st, 2nd and 3rd options finished
 
     return 0;
     }

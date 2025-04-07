@@ -240,6 +240,13 @@
 
 - Šis atvejis yra greitesnis lyginant su 3.3 ir 4.1 versijomis
 
+### 5.1 Atvejis - darbas su egzistuojančiais failais (duomenų apdorojimo greičio testavimas) naudojant class tipo talpyklas studentams
+
+| Studentų skaičius | Namų darbų įvertinimų skaičius | Nuskaitymo greičio vidurkis (s) | Rūšiavimo greičio vidurkis (s) | Kūrimo greičio vidurkis (s) |
+| :------------- | :------------- | :------------- | :------------- | :------------- |
+| 100000 | 10 | 0.2125666666666667 |  |  |
+| 1000000 | 10 | 2.086196666666667 |  |  |
+
 ## Testavimui naudotos sistemos specifikacijos
 
 - CPU - Intel(R) Core(TM) i7-14700HX
