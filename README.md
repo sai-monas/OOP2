@@ -247,6 +247,24 @@
 | 100000 | 10 | 0.2125666666666667 | 0.225403 | 0.032192 |
 | 1000000 | 10 | 2.086196666666667 | 2.817283333333333 | 0.3373903333333333 |
 
+### 6.1 Atvejis - optimizavimo "flag'ų" testavimas
+
+#### Class
+| Flag'as | .exe fail'o dydis (KB) |
+| :------------- | :------------- |
+| `-` | 1140000 |
+| `O1` | 514 |
+| `O2` | 470 |
+| `O3` | 506 |
+
+#### Vector
+| Flag'as | .exe fail'o dydis (KB) |
+| :------------- | :------------- |
+| `-` | 1600 |
+| `O1` | 480 |
+| `O2` | 438 |
+| `O3` | 454 |
+
 ## Testavimui naudotos sistemos specifikacijos
 
 - CPU - Intel(R) Core(TM) i7-14700HX
