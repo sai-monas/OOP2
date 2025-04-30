@@ -37,6 +37,8 @@ using std::count;
 
 #include <cstdio>
 
+#include <utility>
+
 structureBoolInt gradeCheckClass;
 
 class Student {
@@ -48,9 +50,14 @@ class Student {
         std::vector<int> classGrade;
     // interfeisas
     public:
-        Student() {
+        Student(std::string n, std::string s, int ex, std::vector<int> cl) {
+            name = n;
+            surname = s;
+            examGrade = ex;
+            classGrade = cl;
             //cout << "Constructor called" << endl;
         };
+        Student() {};
         std::string getName() {
             return name;
         };
@@ -174,9 +181,6 @@ class Student {
         void clearGrades() {
             classGrade.clear();
         }
-        ~Student() {
-            //cout << "Destructor called" << endl;
-        };
 };
 
 std::vector<Student> students;
@@ -612,6 +616,7 @@ void sortOutputClass(std::vector<Student> &students, int option) {
             }
 
         } // 1st, 2nd and 3rd options finished
+
 
     return 0;
     }
