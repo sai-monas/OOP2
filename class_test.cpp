@@ -40,8 +40,15 @@ using std::count;
 #include <utility>
 
 structureBoolInt gradeCheckClass;
+class Person {
+    private:
+        std::string personName;
+        std::string personSurname;
+    public:
+        virtual std::string getName() = 0;
+};
 
-class Student {
+class Student : public Person {
     // realizacija
     private:
         std::string name;
