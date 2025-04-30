@@ -57,6 +57,9 @@ class Student {
             classGrade = cl;
             //cout << "Constructor called" << endl;
         };
+        ~Student() {
+            //cout << "Destructor called" << endl;
+        };
         Student() {};
         std::string getName() {
             return name;
