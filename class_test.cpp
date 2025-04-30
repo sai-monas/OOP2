@@ -60,6 +60,14 @@ class Student {
         ~Student() {
             //cout << "Destructor called" << endl;
         };
+        Student(const Student& cp)
+            : Student(cp.name, cp.surname, cp.examGrade, cp.classGrade) {
+                //cout << "Copy constructor called" << endl;
+            }
+        Student(Student&& mv) noexcept // move constructor
+            : name(mv.name), surname(mv.surname), examGrade(mv.examGrade), classGrade(mv.classGrade) {
+                mv.classGrade.clear();
+            }
         Student() {};
         std::string getName() {
             return name;
