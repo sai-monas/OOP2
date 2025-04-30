@@ -57,6 +57,7 @@ class Student {
             classGrade = cl;
             //cout << "Constructor called" << endl;
         };
+        Student() {};
         ~Student() {
             //cout << "Destructor called" << endl;
         };
@@ -68,7 +69,21 @@ class Student {
             : name(mv.name), surname(mv.surname), examGrade(mv.examGrade), classGrade(mv.classGrade) {
                 mv.classGrade.clear();
             }
-        Student() {};
+        Student& operator=(const Student& cpassign) // copy assignment
+            {
+                // implemented as move-assignment from a temporary copy for brevity
+                // note that this prevents potential storage reuse
+                return *this = Student(cpassign);
+            }
+        
+        Student& operator=(Student&& mvassign) noexcept // move assignment
+            {
+                std::swap(name, mvassign.name);
+                std::swap(surname, mvassign.surname);
+                std::swap(classGrade, mvassign.classGrade);
+                std::swap(examGrade, mvassign.examGrade);
+                return *this;
+            }
         std::string getName() {
             return name;
         };
@@ -628,6 +643,33 @@ void sortOutputClass(std::vector<Student> &students, int option) {
 
         } // 1st, 2nd and 3rd options finished
 
+    /*std::string nmtest = "name";
+    std::string srtest = "surname";
+    int extest = 10;
+    std::vector<int> cltest;
+    cltest.push_back(8);
+    cltest.push_back(9);
+    // Creating an object using default constructor
+    Student obj1(nmtest, srtest, extest, cltest);
+
+    // Creating an object using Copy constructor
+
+    Student obj2 = obj1;
+
+    // Creating an object using Copy assignment operator
+    Student obj3;
+    obj3 = obj1;
+
+    // Creating an object using Move constructor
+    Student obj4 = std::move(obj1);
+
+    // Creating an object using Move assignment operator
+    Student obj5;
+    obj5 = std::move(obj2);
+
+    cout << "Object 1: " << obj1.getName() << "Object 2: " << obj2.getName() << " " << obj3.getSurname() << " " << obj4.getSurname() << " " << obj5.getExamGrade();*/
+
+    // NEVEIKIA AVERAGE SKAICIAVIMAS (POSSIBLY IR MEDIAN), UZSKAITO NULI KAIP SKAICIU MANUAL INPUT'E (1 VARIANTAS)
 
     return 0;
     }
